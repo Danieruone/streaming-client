@@ -3,7 +3,8 @@ import { Container, StreamingContainer } from './styles';
 // components
 import { LeftBar } from '../../components/LeftBar';
 import { Navbar } from '../../components/Navbar';
-import { VideoStream } from '../../components/videoStream';
+import { VideoStream } from '../../components/VideoStream';
+import { Chat } from '../../components/Chat';
 
 export const StreamingPage = () => {
   return (
@@ -19,7 +20,9 @@ export const StreamingPage = () => {
           <div>
             <VideoStream />
           </div>
-          <div>chat</div>
+          <div>
+            <Chat />
+          </div>
         </StreamingContainer>
       </Container>
     </div>

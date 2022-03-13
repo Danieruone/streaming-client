@@ -1,8 +1,12 @@
+import { useState } from 'react';
+
 // components
 import { LeftAvatar } from '../LeftAvatar';
 
 // ui
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // styles
 import styled from '@emotion/styled';
@@ -14,6 +18,14 @@ export const Container = styled.div`
   padding: 0.5rem;
   background-color: #efeff1;
   height: 100vh;
+`;
+
+export const ExpandField = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+  & span {
+    width: 180px;
+  }
 `;
 
 const content = [
@@ -45,13 +57,26 @@ const content = [
 ];
 
 export const LeftBar = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <Container>
-      <div style={{ margin: '1rem 0 1rem 0' }}>
-        <FavoriteBorderIcon />
-      </div>
-      {content.map((user) => (
-        <LeftAvatar {...user} />
+      <ExpandField>
+        {isExpanded && <span>Canales que sigues</span>}
+        <div
+          onClick={() => setIsExpanded(!isExpanded)}
+          style={{ cursor: 'pointer' }}
+        >
+          {isExpanded ? <ArrowBackIcon /> : <ArrowForwardIcon />}
+        </div>
+      </ExpandField>
+      {!isExpanded && (
+        <div style={{ margin: '1rem 0 1rem 0' }}>
+          <FavoriteBorderIcon />
+        </div>
+      )}
+      {content.map((user, idx) => (
+        <LeftAvatar {...user} isExpanded={isExpanded} key={idx} />
       ))}
     </Container>
   );
