@@ -8,6 +8,7 @@ export const Container = styled.div`
   padding: 1rem;
   display: flex;
   padding-bottom: 5rem;
+  align-items: center;
 `;
 
 export const AvatarCircle = styled.div`

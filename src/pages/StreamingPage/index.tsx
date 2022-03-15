@@ -10,7 +10,7 @@ import { ProfileDescription } from '../../components/ProfileDescription';
 export const StreamingPage = () => {
   return (
     <div>
-      <div style={{ height: '3.5rem' }}>
+      <div style={{ height: '3rem' }}>
         <Navbar />
       </div>
       <Container>
