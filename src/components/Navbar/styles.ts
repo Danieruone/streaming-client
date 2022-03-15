@@ -14,7 +14,6 @@ export const Container = styled.div`
 export const NavOptions = styled.div`
   display: flex;
   * {
-    margin: 0px 20px 0px 20px;
     cursor: pointer;
   }
 `;

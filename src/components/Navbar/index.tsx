@@ -15,7 +15,9 @@ export const Navbar = () => {
       </Icon>
 
       <NavOptions>
-        <Typography variant='h6'>Explorar</Typography>
+        <Typography variant='h6' style={{ margin: '0px 30px 0px 20px' }}>
+          Explorar
+        </Typography>
         <Typography variant='h6'>Instrucciones</Typography>
       </NavOptions>
     </Container>
