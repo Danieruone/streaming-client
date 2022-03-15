@@ -3,30 +3,13 @@ import { useState } from 'react';
 // components
 import { LeftAvatar } from '../LeftAvatar';
 
-// ui
+// UI
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // styles
-import styled from '@emotion/styled';
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.5rem;
-  background-color: #efeff1;
-  height: 100vh;
-`;
-
-export const ExpandField = styled.div`
-  display: flex;
-  margin-bottom: 1rem;
-  & span {
-    width: 180px;
-  }
-`;
+import { Container, ExpandField } from './styles';
 
 const content = [
   {

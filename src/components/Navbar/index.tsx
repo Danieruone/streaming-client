@@ -1,27 +1,11 @@
-import icon from '../../assets/icons/orange-icon.png';
+// icons
+import icon from 'assets/icons/orange-icon.png';
 
-// styles
-import styled from '@emotion/styled';
+// UI
 import { Typography } from '@mui/material';
 
-export const Container = styled.div`
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  position: fixed;
-  top: 0;
-  background-color: white;
-  z-index: 1;
-  width: 100%;
-  display: flex;
-  align-items: center;
-`;
-
-export const Icon = styled.div`
-  width: 30px;
-  margin-right: 1rem;
-  & img {
-    width: 100%;
-  }
-`;
+// styles
+import { Container, Icon, NavOptions } from './styles';
 
 export const Navbar = () => {
   return (
@@ -30,7 +14,10 @@ export const Navbar = () => {
         <img src={icon} />
       </Icon>
 
-      <Typography variant='body1'>Twitch Naranja</Typography>
+      <NavOptions>
+        <Typography variant='h6'>Explorar</Typography>
+        <Typography variant='h6'>Instrucciones</Typography>
+      </NavOptions>
     </Container>
   );
 };

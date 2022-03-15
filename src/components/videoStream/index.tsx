@@ -1,6 +1,7 @@
+import ReactPlayer from 'react-player';
+
 // styles
 import styled from '@emotion/styled';
-import ReactPlayer from 'react-player';
 
 export const Container = styled.div`
   width: 100%;

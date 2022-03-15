@@ -1,11 +1,12 @@
-import { Container, StreamingContainer } from './styles';
-
 // components
-import { LeftBar } from '../../components/LeftBar';
-import { Navbar } from '../../components/Navbar';
-import { VideoStream } from '../../components/VideoStream';
-import { Chat } from '../../components/Chat';
-import { ProfileDescription } from '../../components/ProfileDescription';
+import { LeftBar } from 'components/LeftBar';
+import { Navbar } from 'components/Navbar';
+import { VideoStream } from 'components/VideoStream';
+import { Chat } from 'components/Chat';
+import { ProfileDescription } from 'components/ProfileDescription';
+
+// styles
+import { Container, StreamingContainer } from './styles';
 
 export const StreamingPage = () => {
   return (
