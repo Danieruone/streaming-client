@@ -5,11 +5,12 @@ import { LeftBar } from '../../components/LeftBar';
 import { Navbar } from '../../components/Navbar';
 import { VideoStream } from '../../components/VideoStream';
 import { Chat } from '../../components/Chat';
+import { ProfileDescription } from '../../components/ProfileDescription';
 
 export const StreamingPage = () => {
   return (
     <div>
-      <div>
+      <div style={{ height: '3.5rem' }}>
         <Navbar />
       </div>
       <Container>
@@ -17,8 +18,9 @@ export const StreamingPage = () => {
           <LeftBar />
         </div>
         <StreamingContainer>
-          <div>
+          <div style={{ overflowX: 'auto', height: '100vh' }}>
             <VideoStream />
+            <ProfileDescription />
           </div>
           <div>
             <Chat />
