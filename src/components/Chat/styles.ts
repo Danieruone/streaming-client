@@ -19,6 +19,10 @@ export const ChatContainer = styled.div`
   height: 100%;
   padding: 1rem;
   overflow: scroll;
+  & span {
+    color: gray;
+    font-size: 0.9rem;
+  }
 `;
 
 export const InputContainer = styled.form`

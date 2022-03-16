@@ -49,6 +49,18 @@ export const Chat = () => {
         </Typography>
       </TopChat>
       <ChatContainer ref={chatScrollbar}>
+        {roomMessages?.length === 0 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '3rem',
+            }}
+          >
+            <span>Sé el primero en enviar un mensaje</span>
+          </div>
+        )}
+
         {roomMessages.map((msg, idx) => (
           <MessageComponent {...msg} key={idx} />
         ))}
