@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   padding-bottom: 5rem;
   align-items: center;
+  background-color: #f7f7f8;
 `;
 
 export const AvatarCircle = styled.div`
