@@ -18,9 +18,10 @@ export const TopChat = styled.div`
 export const ChatContainer = styled.div`
   height: 100%;
   padding: 1rem;
+  overflow: scroll;
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.form`
   padding: 1rem;
   display: flex;
   justify-content: space-around;
