@@ -19,7 +19,7 @@ export const StreamingPage = () => {
           <LeftBar />
         </div>
         <StreamingContainer>
-          <div style={{ overflowX: 'auto', height: '100vh' }}>
+          <div style={{ overflowY: 'scroll', height: '100vh' }}>
             <VideoStream />
             <ProfileDescription />
           </div>

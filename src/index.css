@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: white;
+  background: #f06109;
+}
+
+::selection {
+  color: white;
+  background: #f06109;
+}

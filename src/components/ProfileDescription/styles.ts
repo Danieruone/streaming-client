@@ -1,11 +1,32 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: #f7f7f8;
+  padding: 1rem;
+  padding-bottom: 10rem;
+`;
+
+export const TopDescription = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7f7f8;
+  width: 100%;
+`;
+
+export const Profile = styled.div`
   padding: 1rem;
   display: flex;
-  padding-bottom: 5rem;
   align-items: center;
-  background-color: #f7f7f8;
+`;
+
+export const Viwers = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+  color: #af4c4b;
 `;
 
 export const AvatarCircle = styled.div`

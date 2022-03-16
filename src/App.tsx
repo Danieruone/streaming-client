@@ -1,8 +1,15 @@
+// recoil
+import { RecoilRoot } from 'recoil';
+
 // components
 import { StreamingPage } from './pages/StreamingPage';
 
 function App() {
-  return <StreamingPage />;
+  return (
+    <RecoilRoot>
+      <StreamingPage />
+    </RecoilRoot>
+  );
 }
 
 export default App;
