@@ -20,7 +20,7 @@ export const VideoStream = () => {
         controls
         width='100%'
         height='100%'
-        url='http://167.99.227.213:3000/hls/test2.m3u8'
+        // url='http://167.99.227.213:3000/hls/test2.m3u8'
       />
     </Container>
   );
