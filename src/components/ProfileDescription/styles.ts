@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #f7f7f8;
-  padding: 1rem;
   padding-bottom: 10rem;
 `;
 
@@ -35,7 +34,7 @@ export const AvatarCircle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   margin-right: 1rem;
 `;
