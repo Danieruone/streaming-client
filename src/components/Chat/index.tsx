@@ -13,19 +13,24 @@ import { MessageComponent } from 'components/MessageComponent';
 import { Container, TopChat, ChatContainer, InputContainer } from './styles';
 
 // state
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { chatRoomMessages } from 'state/atoms/Chat';
+import { profileState } from 'state/atoms/Profile';
 
 export const Chat = () => {
   const chatScrollbar: any = useRef(null);
 
+  const profile = useRecoilValue(profileState);
   const [roomMessages, setRoomMessages] = useRecoilState(chatRoomMessages);
   const [message, setMessage] = useState('');
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (message !== '') {
-      setRoomMessages([...roomMessages, { name: 'Darulive', message }]);
+      setRoomMessages([
+        ...roomMessages,
+        { name: profile.name, message, userColor: profile.chatStreamColor },
+      ]);
       setMessage('');
     }
   };
