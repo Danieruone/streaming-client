@@ -71,6 +71,7 @@ export const Chat = () => {
           label='Type your message'
           variant='standard'
           color='warning'
+          autoComplete='off'
           onChange={(e) => setMessage(e.target.value)}
         />
         <Button

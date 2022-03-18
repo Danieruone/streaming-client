@@ -15,10 +15,15 @@ export const Navbar = () => {
       </Icon>
 
       <NavOptions>
-        <Typography variant='h6' style={{ margin: '0px 30px 0px 20px' }}>
+        <Typography
+          variant='h6'
+          style={{ margin: '0px 30px 0px 20px', fontSize: '1rem' }}
+        >
           Explorar
         </Typography>
-        <Typography variant='h6'>Instrucciones</Typography>
+        <Typography variant='h6' style={{ fontSize: '1rem' }}>
+          Instrucciones
+        </Typography>
       </NavOptions>
     </Container>
   );
