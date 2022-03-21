@@ -27,3 +27,8 @@ code {
   color: white;
   background: #f06109;
 }
+
+audio::-webkit-media-controls-timeline,
+video::-webkit-media-controls-timeline {
+  display: none;
+}
