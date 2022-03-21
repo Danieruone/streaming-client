@@ -15,7 +15,8 @@ import { Container, ExpandField } from './styles';
 const content = [
   {
     name: 'Daniel',
-    streamTitle: 'Jugando aqui relax',
+    streamTitle:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
     profileURL: 'https://picsum.photos/200',
   },
   {
@@ -30,7 +31,8 @@ const content = [
   },
   {
     name: 'Rubius',
-    streamTitle: 'Jugando aqui relax',
+    streamTitle:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
     profileURL: 'https://picsum.photos/200',
   },
   {
