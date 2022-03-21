@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Dispatch, SetStateAction } from 'react';
 
 // modal
 import Modal from '@mui/material/Modal';
@@ -19,8 +19,8 @@ const style = {
 
 interface Props {
   isOpen: boolean;
-  setIsOpen: any;
-  children: any;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  children: JSX.Element;
 }
 
 export const ModalComponent: FC<Props> = ({ isOpen, setIsOpen, children }) => {

@@ -4,7 +4,7 @@ import { createContext, FC } from 'react';
 import { useSocket } from 'hooks/useSocket';
 
 interface Props {
-  children: any;
+  children?: JSX.Element;
 }
 
 interface SocketContext {
