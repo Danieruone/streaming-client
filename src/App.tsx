@@ -2,12 +2,15 @@
 import { RecoilRoot } from 'recoil';
 
 // components
-import { StreamingPage } from './pages/StreamingPage';
+import { StreamingPage } from 'pages/StreamingPage';
+import { SocketProvider } from 'context/SocketProvider';
 
 function App() {
   return (
     <RecoilRoot>
-      <StreamingPage />
+      <SocketProvider>
+        <StreamingPage />
+      </SocketProvider>
     </RecoilRoot>
   );
 }
