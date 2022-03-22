@@ -5,6 +5,9 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import { Typography } from '@mui/material';
 
+// router
+import { Link } from 'react-router-dom';
+
 // styles
 import styled from '@emotion/styled';
 
@@ -12,26 +15,34 @@ interface ContainerProps {
   isExpanded: boolean;
 }
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled(Link)<ContainerProps>`
   cursor: pointer;
   width: 100%;
   margin-bottom: 0.5rem;
+  text-decoration: none;
+  color: black;
   ${({ isExpanded }) =>
     isExpanded && 'display: flex; align-items: center; margin-left: 1rem;'}
 `;
 
 interface Props {
   name: string;
+  broadcaster_id: number;
   streamTitle: string;
   profileURL: string;
   isExpanded: boolean;
 }
 
-export const LeftAvatar: FC<Props> = ({ name, streamTitle, isExpanded }) => {
+export const LeftAvatar: FC<Props> = ({
+  name,
+  streamTitle,
+  isExpanded,
+  broadcaster_id,
+}) => {
   return (
-    <Container isExpanded={isExpanded}>
+    <Container isExpanded={isExpanded} to={`/broadcaster/${broadcaster_id}`}>
       <Tooltip
-        title={name}
+        title={isExpanded ? '' : name}
         placement='right-start'
         style={{ marginRight: '1rem' }}
       >
