@@ -1,3 +1,4 @@
+// components
 import { Navbar } from 'components/Navbar';
 import { LeftBar } from 'components/LeftBar';
 
@@ -13,7 +14,7 @@ export const Container = styled.div`
 export const OnlineStreams = () => {
   return (
     <div>
-      <div style={{ height: '3rem' }}>
+      <div style={{ height: '3rem', boxShadow: '#6c6666 -1px 1px 4px 1px' }}>
         <Navbar />
       </div>
       <Container>
