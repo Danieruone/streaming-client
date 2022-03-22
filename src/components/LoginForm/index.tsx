@@ -29,10 +29,12 @@ export const LoginForm = () => {
 
   const onSubmit = (data: any) => {
     setIsLoading(true);
-    logIn(data)
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err))
-      .finally(() => setIsLoading(false));
+    if (data) {
+      logIn(data)
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
+    }
   };
 
   return (
@@ -49,7 +51,7 @@ export const LoginForm = () => {
         autoComplete='off'
         style={{ marginTop: '1rem' }}
         {...register('email', { required: true })}
-        error={errors.email}
+        error={errors.email ? true : false}
       />
       <TextField
         label='Password'
@@ -59,7 +61,7 @@ export const LoginForm = () => {
         autoComplete='off'
         style={{ marginTop: '1rem', marginBottom: '2rem' }}
         {...register('password', { required: true })}
-        error={errors.password}
+        error={errors.password ? true : false}
       />
 
       {isLoading ? (
