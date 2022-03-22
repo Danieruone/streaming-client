@@ -1,6 +1,6 @@
 // components
-import { Navbar } from 'components/Navbar';
-import { LeftBar } from 'components/LeftBar';
+import { Navbar } from 'components/Common/Navbar';
+import { LeftBar } from 'components/Common/LeftBar';
 
 import styled from '@emotion/styled';
 

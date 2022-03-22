@@ -7,9 +7,9 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 
 // components
-import { MessageComponent } from 'components/MessageComponent';
-import { LoginForm } from 'components/LoginForm';
-import { ModalComponent } from 'components/ModalComponent';
+import { MessageComponent } from 'components/Common/MessageComponent';
+import { LoginForm } from 'components/Common/LoginForm';
+import { ModalComponent } from 'components/Shared/ModalComponent';
 
 // styles
 import { Container, TopChat, ChatContainer, InputContainer } from './styles';
