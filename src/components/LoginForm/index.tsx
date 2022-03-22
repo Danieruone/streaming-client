@@ -3,6 +3,9 @@ import { useState } from 'react';
 // media
 import twitchLogo from 'assets/icons/twitch.png';
 
+// form
+import { useForm } from 'react-hook-form';
+
 // UI
 import { Typography } from '@mui/material';
 import { TextField } from '@mui/material';
@@ -16,20 +19,24 @@ import { Container, LogoContainer } from './styles';
 import { logIn } from 'services/Auth';
 
 export const LoginForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const onSubmit = (data: any) => {
     setIsLoading(true);
-    const payload = { email: 'test@test.com', password: 'hola' };
-    logIn(payload)
+    logIn(data)
       .then((data) => console.log(data))
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));
   };
 
   return (
-    <Container onSubmit={(e) => handleSubmit(e)}>
+    <Container onSubmit={handleSubmit(onSubmit)}>
       <LogoContainer>
         <img src={twitchLogo} />
       </LogoContainer>
@@ -41,7 +48,8 @@ export const LoginForm = () => {
         color='warning'
         autoComplete='off'
         style={{ marginTop: '1rem' }}
-        // onChange={(e) => setMessage(e.target.value)}
+        {...register('email', { required: true })}
+        error={errors.email}
       />
       <TextField
         label='Password'
@@ -50,7 +58,8 @@ export const LoginForm = () => {
         type='password'
         autoComplete='off'
         style={{ marginTop: '1rem', marginBottom: '2rem' }}
-        // onChange={(e) => setMessage(e.target.value)}
+        {...register('password', { required: true })}
+        error={errors.password}
       />
 
       {isLoading ? (
