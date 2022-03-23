@@ -1,11 +1,10 @@
-import { useEffect, FC, useState } from 'react';
+import { FC, useState } from 'react';
 
 // UI
 import { Typography } from '@mui/material';
 
 // npm
 import ReactPlayer from 'react-player';
-import axios from 'axios';
 
 // styles
 import { Container, OfflineBox } from './styles';
@@ -16,19 +15,6 @@ interface Props {
 
 export const VideoStream: FC<Props> = ({ url }) => {
   const [isOnline, setIsOnline] = useState(false);
-
-  useEffect(() => {
-    if (url) {
-      try {
-        axios
-          .head(url)
-          .then(() => setIsOnline(true))
-          .catch(() => setIsOnline(false));
-      } catch (err) {
-        setIsOnline(false);
-      }
-    }
-  }, []);
 
   return (
     <Container>
@@ -42,7 +28,7 @@ export const VideoStream: FC<Props> = ({ url }) => {
           </div>
         </OfflineBox>
       )}
-      <ReactPlayer autoPlay controls width='100%' height='100%' url={url} />
+      <ReactPlayer controls width='100%' height='100%' url={url} />
     </Container>
   );
 };
