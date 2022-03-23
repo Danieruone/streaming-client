@@ -5,35 +5,13 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import { Typography } from '@mui/material';
 
-// router
-import { Link } from 'react-router-dom';
+// types
+import { LeftAvatarProps } from 'interfaces/components/LeftAvatar';
 
 // styles
-import styled from '@emotion/styled';
+import { Container } from './styles';
 
-interface ContainerProps {
-  isExpanded: boolean;
-}
-
-export const Container = styled(Link)<ContainerProps>`
-  cursor: pointer;
-  width: 100%;
-  margin-bottom: 0.5rem;
-  text-decoration: none;
-  color: black;
-  ${({ isExpanded }) =>
-    isExpanded && 'display: flex; align-items: center; margin-left: 1rem;'}
-`;
-
-interface Props {
-  name: string;
-  broadcaster_id: number;
-  streamTitle: string;
-  profileURL: string;
-  isExpanded: boolean;
-}
-
-export const LeftAvatar: FC<Props> = ({
+export const LeftAvatar: FC<LeftAvatarProps> = ({
   name,
   streamTitle,
   isExpanded,
