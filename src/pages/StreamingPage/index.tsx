@@ -23,7 +23,7 @@ export const StreamingPage = () => {
             <VideoStream
               url={
                 ''
-                // 'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8'
+                // 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8'
               }
             />
             <ProfileDescription />

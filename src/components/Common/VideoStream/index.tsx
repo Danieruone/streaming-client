@@ -19,10 +19,14 @@ export const VideoStream: FC<Props> = ({ url }) => {
 
   useEffect(() => {
     if (url) {
-      axios
-        .head(url)
-        .then(() => setIsOnline(true))
-        .catch(() => setIsOnline(false));
+      try {
+        axios
+          .head(url)
+          .then(() => setIsOnline(true))
+          .catch(() => setIsOnline(false));
+      } catch (err) {
+        setIsOnline(false);
+      }
     }
   }, []);
 
@@ -38,7 +42,7 @@ export const VideoStream: FC<Props> = ({ url }) => {
           </div>
         </OfflineBox>
       )}
-      <ReactPlayer controls width='100%' height='100%' url={url} />
+      <ReactPlayer autoPlay controls width='100%' height='100%' url={url} />
     </Container>
   );
 };
