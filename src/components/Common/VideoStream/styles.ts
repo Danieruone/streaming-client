@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const OfflineBox = styled.div`
   width: 30rem;
-  height: 88%;
+  height: 85%;
   position: absolute;
   right: 0;
   background-color: rgba(189, 189, 189, 0.1);
