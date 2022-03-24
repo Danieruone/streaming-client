@@ -1,3 +1,6 @@
+// router
+import { useParams } from 'react-router-dom';
+
 // components
 import { LeftBar } from 'components/Common/LeftBar';
 import { Navbar } from 'components/Common/Navbar';
@@ -9,6 +12,9 @@ import { ProfileDescription } from 'components/Common/ProfileDescription';
 import { Container, StreamingContainer } from './styles';
 
 export const StreamingPage = () => {
+  const { userId } = useParams();
+  console.log(userId);
+
   return (
     <div>
       <div style={{ height: '3rem' }}>
