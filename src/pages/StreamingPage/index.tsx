@@ -20,7 +20,12 @@ export const StreamingPage = () => {
         </div>
         <StreamingContainer>
           <div style={{ overflowY: 'scroll', height: '100vh' }}>
-            <VideoStream />
+            <VideoStream
+              url={
+                'http://159.203.189.250:3000/hls/test.m3u8'
+                // 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8'
+              }
+            />
             <ProfileDescription />
           </div>
           <div>

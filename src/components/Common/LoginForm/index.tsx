@@ -18,7 +18,17 @@ import { Container, LogoContainer } from './styles';
 // services
 import { logIn } from 'services/Auth';
 
+// state
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { isLoggedIn } from 'state/atoms/Auth';
+import { profileState } from 'state/atoms/Profile';
+import { authModalState } from 'state/atoms/AuthFormModal';
+
 export const LoginForm = () => {
+  const setLoginState = useSetRecoilState(isLoggedIn);
+  const setAuthFormModal = useSetRecoilState(authModalState);
+  const [profile, setProfileState] = useRecoilState(profileState);
+
   const {
     register,
     handleSubmit,
@@ -27,14 +37,18 @@ export const LoginForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (values: any) => {
     setIsLoading(true);
-    if (data) {
-      logIn(data)
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err))
-        .finally(() => setIsLoading(false));
-    }
+    logIn(values)
+      .then(({ data }) => {
+        localStorage.setItem('acces_token', data.token);
+        localStorage.setItem('user_data', JSON.stringify(data.user));
+        setProfileState({ ...profile, ...data.user });
+        setLoginState(true);
+        setAuthFormModal(false);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   };
 
   return (

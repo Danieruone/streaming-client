@@ -1,4 +1,6 @@
 import { useState } from 'react';
+
+// animation
 import { motion } from 'framer-motion';
 
 // components
@@ -12,40 +14,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // styles
 import { Container, ExpandField } from './styles';
 
-const content = [
-  {
-    name: 'Daniel',
-    streamTitle:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    profileURL: 'https://picsum.photos/200',
-    broadcaster_id: 1,
-  },
-  {
-    name: 'WestCol',
-    streamTitle: 'Jugando aqui relax',
-    profileURL: 'https://picsum.photos/200',
-    broadcaster_id: 2,
-  },
-  {
-    name: 'Cristian',
-    streamTitle: 'Jugando aqui relax',
-    profileURL: 'https://picsum.photos/200',
-    broadcaster_id: 3,
-  },
-  {
-    name: 'Rubius',
-    streamTitle:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,',
-    profileURL: 'https://picsum.photos/200',
-    broadcaster_id: 4,
-  },
-  {
-    name: 'Xokas',
-    streamTitle: 'Jugando aqui relax',
-    profileURL: 'https://picsum.photos/200',
-    broadcaster_id: 5,
-  },
-];
+// content
+import { streamersArray } from 'assets/content/streamers';
 
 export const LeftBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -72,7 +42,7 @@ export const LeftBar = () => {
             <FavoriteBorderIcon />
           </div>
         )}
-        {content.map((user, idx) => (
+        {streamersArray.map((user, idx) => (
           <LeftAvatar {...user} isExpanded={isExpanded} key={idx} />
         ))}
       </Container>

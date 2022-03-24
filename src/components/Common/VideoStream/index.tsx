@@ -1,27 +1,73 @@
-import ReactPlayer from 'react-player';
+import { FC, useEffect, useRef, useState } from 'react';
+
+// UI
+import { Typography } from '@mui/material';
+
+// npm
+import Hls from 'hls.js';
 
 // styles
-import styled from '@emotion/styled';
+import { Container, OfflineBox } from './styles';
 
-export const Container = styled.div`
-  width: 100%;
-  height: 82vh;
-  background-color: black;
-  & video {
-    width: 100%;
-    height: 100%;
-  }
-`;
+interface Props {
+  url: string;
+}
 
-export const VideoStream = () => {
+export const VideoStream: FC<Props> = ({ url }) => {
+  const videoRef: any = useRef(null);
+  const hls = new Hls({
+    liveSyncDurationCount: 3,
+    startPosition: -1,
+    liveDurationInfinity: true,
+  });
+
+  const [isOnline, setIsOnline] = useState(false);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      hls.attachMedia(videoRef.current);
+    }
+
+    hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+      hls.loadSource(url);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        hls.on(Hls.Events.BUFFER_APPENDED, () => {
+          setIsOnline(true);
+        });
+      });
+    });
+
+    hls.on(Hls.Events.ERROR, (event, data) => {
+      if (
+        data.details === 'bufferStalledError' ||
+        data.type === 'networkError'
+      ) {
+        setIsOnline(false);
+        hls.destroy();
+      }
+    });
+  }, []);
+
   return (
     <Container>
-      <ReactPlayer
+      {!isOnline && (
+        <OfflineBox>
+          <div>
+            <Typography variant='h2'>Offline</Typography>
+            <Typography variant='body2'>
+              El streamer ahora mismo no está transmitiendo, vuelve más tarde
+            </Typography>
+          </div>
+        </OfflineBox>
+      )}
+      <video
+        ref={videoRef}
         controls
+        autoPlay
+        muted
         width='100%'
         height='100%'
-        // url='https://multiplatform-f.akamaihd.net/i/multi/april11/sintel/sintel-hd_,512x288_450_b,640x360_700_b,768x432_1000_b,1024x576_1400_m,.mp4.csmil/master.m3u8'
-      />
+      ></video>
     </Container>
   );
 };
