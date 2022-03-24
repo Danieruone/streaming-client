@@ -22,9 +22,11 @@ import { logIn } from 'services/Auth';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { isLoggedIn } from 'state/atoms/Auth';
 import { profileState } from 'state/atoms/Profile';
+import { authModalState } from 'state/atoms/AuthFormModal';
 
 export const LoginForm = () => {
   const setLoginState = useSetRecoilState(isLoggedIn);
+  const setAuthFormModal = useSetRecoilState(authModalState);
   const [profile, setProfileState] = useRecoilState(profileState);
 
   const {
@@ -43,6 +45,7 @@ export const LoginForm = () => {
         localStorage.setItem('user_data', JSON.stringify(data.user));
         setProfileState({ ...profile, ...data.user });
         setLoginState(true);
+        setAuthFormModal(false);
       })
       .catch((err) => console.log(err))
       .finally(() => setIsLoading(false));

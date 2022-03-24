@@ -8,17 +8,16 @@ import SendIcon from '@mui/icons-material/Send';
 
 // components
 import { MessageComponent } from 'components/Common/MessageComponent';
-import { LoginForm } from 'components/Common/LoginForm';
-import { ModalComponent } from 'components/Shared/ModalComponent';
 
 // styles
 import { Container, TopChat, ChatContainer, InputContainer } from './styles';
 
 // state
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { chatRoomMessages } from 'state/atoms/Chat';
 import { profileState } from 'state/atoms/Profile';
 import { isLoggedIn } from 'state/atoms/Auth';
+import { authModalState } from 'state/atoms/AuthFormModal';
 
 export const Chat = () => {
   const chatScrollbar: any = useRef(null);
@@ -26,11 +25,10 @@ export const Chat = () => {
   // state
   const profile = useRecoilValue(profileState);
   const isLoggedState = useRecoilValue(isLoggedIn);
+  const setAuthModalState = useSetRecoilState(authModalState);
   const [roomMessages, setRoomMessages] = useRecoilState(chatRoomMessages);
-  const [message, setMessage] = useState('');
 
-  // modal
-  const [loginModalState, setLoginModalState] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -43,7 +41,7 @@ export const Chat = () => {
         setMessage('');
       }
     } else {
-      setLoginModalState(true);
+      setAuthModalState(true);
     }
   };
 
@@ -54,56 +52,47 @@ export const Chat = () => {
   }, [roomMessages]);
 
   return (
-    <>
-      <Container>
-        <TopChat>
-          <Typography style={{ fontSize: '.8rem' }} variant='h6'>
-            CHAT DEL STREAM
-          </Typography>
-        </TopChat>
-        <ChatContainer ref={chatScrollbar}>
-          {roomMessages?.length === 0 && (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '3rem',
-              }}
-            >
-              <span>Sé el primero en enviar un mensaje</span>
-            </div>
-          )}
-
-          {roomMessages.map((msg, idx) => (
-            <MessageComponent {...msg} key={idx} />
-          ))}
-        </ChatContainer>
-        <InputContainer onSubmit={(e) => handleSubmit(e)}>
-          <TextField
-            value={message}
-            label='Type your message'
-            variant='standard'
-            color='warning'
-            autoComplete='off'
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <Button
-            variant='outlined'
-            color='warning'
-            endIcon={<SendIcon />}
-            type='submit'
+    <Container>
+      <TopChat>
+        <Typography style={{ fontSize: '.8rem' }} variant='h6'>
+          CHAT DEL STREAM
+        </Typography>
+      </TopChat>
+      <ChatContainer ref={chatScrollbar}>
+        {roomMessages?.length === 0 && (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '3rem',
+            }}
           >
-            Send
-          </Button>
-        </InputContainer>
-      </Container>
+            <span>Sé el primero en enviar un mensaje</span>
+          </div>
+        )}
 
-      <ModalComponent
-        isOpen={loginModalState}
-        setIsOpen={() => setLoginModalState(false)}
-      >
-        <LoginForm />
-      </ModalComponent>
-    </>
+        {roomMessages.map((msg, idx) => (
+          <MessageComponent {...msg} key={idx} />
+        ))}
+      </ChatContainer>
+      <InputContainer onSubmit={(e) => handleSubmit(e)}>
+        <TextField
+          value={message}
+          label='Type your message'
+          variant='standard'
+          color='warning'
+          autoComplete='off'
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <Button
+          variant='outlined'
+          color='warning'
+          endIcon={<SendIcon />}
+          type='submit'
+        >
+          Send
+        </Button>
+      </InputContainer>
+    </Container>
   );
 };
