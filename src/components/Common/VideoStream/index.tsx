@@ -38,7 +38,6 @@ export const VideoStream: FC<Props> = ({ url }) => {
     });
 
     hls.on(Hls.Events.ERROR, (event, data) => {
-      console.log(data);
       if (
         data.details === 'bufferStalledError' ||
         data.type === 'networkError'
