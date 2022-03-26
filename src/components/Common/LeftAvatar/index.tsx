@@ -28,16 +28,17 @@ export const LeftAvatar: FC<LeftAvatarProps> = ({
       </Tooltip>
       <div>
         {isExpanded && (
-          <Typography style={{ fontSize: '.9rem' }}>
-            <strong>{name}</strong>
-          </Typography>
-        )}
-        {isExpanded && (
-          <Tooltip title={streamTitle} placement='right-start'>
-            <Typography style={{ fontSize: '.8rem', width: 180 }} noWrap>
-              {streamTitle}
+          <>
+            <Typography style={{ fontSize: '.9rem' }}>
+              <strong>{name}</strong>
             </Typography>
-          </Tooltip>
+
+            <Tooltip title={streamTitle} placement='right-start'>
+              <Typography style={{ fontSize: '.8rem', width: 180 }} noWrap>
+                {streamTitle}
+              </Typography>
+            </Tooltip>
+          </>
         )}
       </div>
     </Container>

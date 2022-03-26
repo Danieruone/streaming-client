@@ -12,6 +12,10 @@ export const Container = styled(Link)<ContainerProps>`
   margin-bottom: 0.5rem;
   text-decoration: none;
   color: black;
+  padding: 3px;
   ${({ isExpanded }) =>
     isExpanded && 'display: flex; align-items: center; margin-left: 1rem;'}
+  &:hover {
+    background-color: #dbdbdd;
+  }
 `;
