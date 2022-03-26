@@ -1,5 +1,7 @@
-// styles
+// UI
 import { Avatar, Typography } from '@mui/material';
+
+// styles
 import {
   Container,
   ImageContainer,

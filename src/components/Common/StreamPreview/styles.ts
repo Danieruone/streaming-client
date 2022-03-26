@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 20rem;
   margin: 1rem;
   margin-bottom: 5rem;
+  cursor: pointer;
 `;
 
 export const ImageContainer = styled.div`
