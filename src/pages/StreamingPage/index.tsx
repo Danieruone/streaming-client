@@ -13,7 +13,6 @@ import { Container, StreamingContainer } from './styles';
 
 export const StreamingPage = () => {
   const { userId } = useParams();
-  console.log(userId);
 
   return (
     <div>
@@ -28,7 +27,7 @@ export const StreamingPage = () => {
           <div style={{ overflowY: 'scroll', height: '100vh' }}>
             <VideoStream
               url={
-                'http://159.203.189.250:3000/hls/test.m3u8'
+                'http://159.203.189.250/live/daru/index.m3u8'
                 // 'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8'
               }
             />

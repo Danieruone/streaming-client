@@ -1,15 +1,10 @@
 // components
 import { Navbar } from 'components/Common/Navbar';
 import { LeftBar } from 'components/Common/LeftBar';
+import { StreamPreview } from 'components/Common/StreamPreview';
 
-import styled from '@emotion/styled';
-
-export const Container = styled.div`
-  display: flex;
-  position: fixed;
-  right: 0;
-  left: 0;
-`;
+// styles
+import { Container, StreamsContainer } from './styles';
 
 export const OnlineStreams = () => {
   return (
@@ -21,7 +16,15 @@ export const OnlineStreams = () => {
         <div>
           <LeftBar />
         </div>
-        <div></div>
+        <StreamsContainer>
+          <StreamPreview />
+          <StreamPreview />
+          <StreamPreview />
+          <StreamPreview />
+          <StreamPreview />
+          <StreamPreview />
+          <StreamPreview />
+        </StreamsContainer>
       </Container>
     </div>
   );
