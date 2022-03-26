@@ -20,7 +20,7 @@ export const DirectBadge = styled.span`
   background-color: #ef5b00;
   color: white;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   padding: 3px;
   border-radius: 5px;
   top: 5px;

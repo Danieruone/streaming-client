@@ -19,7 +19,7 @@ export const StreamPreview = () => {
       <InfoContainer>
         <Avatar />
         <div style={{ marginLeft: '1rem' }}>
-          <Typography variant='body1'>
+          <Typography variant='body2'>
             <strong>Aquí jugando en stream, pasen!!</strong>
           </Typography>
           <Typography variant='body2'>Darulive</Typography>
