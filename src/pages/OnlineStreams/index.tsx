@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 // components
 import { Navbar } from 'components/Common/Navbar';
@@ -9,8 +9,30 @@ import { SkeletonStreamPreview } from 'components/Common/SkeletonStreamPreview';
 // styles
 import { Container, StreamsContainer } from './styles';
 
+// context
+import { SocketContext } from 'context/SocketProvider';
+
 export const OnlineStreams = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [streamsArray, setStreamsArray] = useState([]);
+
+  const { socket } = useContext(SocketContext);
+
+  useEffect(() => {
+    setIsLoading(true);
+    socket.on('streams', (streams: any) => {
+      console.log('array streams: ', streams);
+      setStreamsArray(streams);
+      setIsLoading(false);
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on('add-stream', (stream: never) => {
+      console.log('new stream: ', stream);
+      setStreamsArray((prev) => [...prev, stream]);
+    });
+  }, [socket]);
 
   return (
     <div>
@@ -34,13 +56,9 @@ export const OnlineStreams = () => {
             </>
           ) : (
             <>
-              <StreamPreview />
-              <StreamPreview />
-              <StreamPreview />
-              <StreamPreview />
-              <StreamPreview />
-              <StreamPreview />
-              <StreamPreview />
+              {streamsArray.map((stream, key) => (
+                <StreamPreview key={key} />
+              ))}
             </>
           )}
         </StreamsContainer>
