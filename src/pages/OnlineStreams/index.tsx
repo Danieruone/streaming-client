@@ -12,15 +12,19 @@ import { Container, StreamsContainer } from './styles';
 // context
 import { SocketContext } from 'context/SocketProvider';
 
+interface streamObject {
+  id: string;
+}
+
 export const OnlineStreams = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [streamsArray, setStreamsArray] = useState([]);
+  const [streamsArray, setStreamsArray] = useState<streamObject[] | []>([]);
 
   const { socket } = useContext(SocketContext);
 
   useEffect(() => {
     setIsLoading(true);
-    socket.on('streams', (streams: any) => {
+    socket.on('streams', (streams: streamObject[]) => {
       console.log('array streams: ', streams);
       setStreamsArray(streams);
       setIsLoading(false);
@@ -28,9 +32,18 @@ export const OnlineStreams = () => {
   }, [socket]);
 
   useEffect(() => {
-    socket.on('add-stream', (stream: never) => {
+    socket.on('add-stream', (stream: streamObject) => {
       console.log('new stream: ', stream);
       setStreamsArray((prev) => [...prev, stream]);
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on('remove-stream', (stream_id: string) => {
+      console.log('deleted stream: ', stream_id);
+      setStreamsArray((prev) =>
+        prev.filter((oldStream) => stream_id !== oldStream.id)
+      );
     });
   }, [socket]);
 
