@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 // UI
 import { Avatar, Typography } from '@mui/material';
 
@@ -9,20 +11,41 @@ import {
   InfoContainer,
 } from './styles';
 
-export const StreamPreview = () => {
+import { useNavigate } from 'react-router-dom';
+
+import { streamObject } from 'pages/OnlineStreams';
+
+export const StreamPreview: FC<streamObject> = ({
+  thumbnail,
+  title,
+  user,
+  url,
+}) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/broadcaster', {
+      state: {
+        url,
+        title,
+        user,
+      },
+    });
+  };
+
   return (
-    <Container>
+    <Container onClick={() => handleClick()}>
       <ImageContainer>
         <DirectBadge>EN DIRECTO</DirectBadge>
-        <img src='https://marketing4ecommerce.net/wp-content/uploads/2020/08/como-emitir-en-directo-en-Twitch-1280x720.jpg' />
+        <img src={thumbnail} />
       </ImageContainer>
       <InfoContainer>
-        <Avatar />
+        <Avatar src={user.image} />
         <div style={{ marginLeft: '1rem' }}>
           <Typography variant='body2'>
-            <strong>Aquí jugando en stream, pasen!!</strong>
+            <strong>{title}</strong>
           </Typography>
-          <Typography variant='body2'>Darulive</Typography>
+          <Typography variant='body2'>{user.name}</Typography>
         </div>
       </InfoContainer>
     </Container>

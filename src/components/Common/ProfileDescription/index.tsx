@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 // UI
 import Avatar from '@mui/material/Avatar';
 import { Typography } from '@mui/material';
@@ -16,11 +18,8 @@ import {
 
 // state
 import { useRecoilValue } from 'recoil';
-import { profileState } from 'state/atoms/Profile';
 
 export const ProfileDescription = () => {
-  const profile = useRecoilValue(profileState);
-
   return (
     <Container>
       <TopDescription>
@@ -30,8 +29,8 @@ export const ProfileDescription = () => {
           </AvatarCircle>
 
           <div>
-            <Typography variant='h6'>{profile.name}</Typography>
-            <Typography variant='body2'>{profile.streamDescription}</Typography>
+            {/* <Typography variant='h6'>{name}</Typography>
+            <Typography variant='body2'>{title}</Typography> */}
 
             <Stack direction='row' spacing={1} style={{ marginTop: 5 }}>
               <Chip label='Games' />
