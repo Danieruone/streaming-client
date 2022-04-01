@@ -12,8 +12,17 @@ import { Container, StreamsContainer } from './styles';
 // context
 import { SocketContext } from 'context/SocketProvider';
 
-interface streamObject {
+interface User {
+  name: string;
+  image: string;
+}
+
+export interface streamObject {
   id: string;
+  thumbnail: string;
+  title: string;
+  url: string;
+  user: User;
 }
 
 export const OnlineStreams = () => {
@@ -69,8 +78,8 @@ export const OnlineStreams = () => {
             </>
           ) : (
             <>
-              {streamsArray.map((stream, key) => (
-                <StreamPreview key={key} />
+              {streamsArray.map((stream) => (
+                <StreamPreview key={stream.id} {...stream} />
               ))}
             </>
           )}

@@ -17,7 +17,7 @@ function App() {
         <>
           <Routes>
             <Route path='/' element={<OnlineStreams />} />
-            <Route path='/broadcaster/:userId' element={<StreamingPage />} />
+            <Route path='/broadcaster/:username' element={<StreamingPage />} />
           </Routes>
           <AuthFormModal />
         </>
