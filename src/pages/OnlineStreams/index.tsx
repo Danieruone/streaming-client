@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 // components
 import { Navbar } from 'components/Common/Navbar';
 import { LeftBar } from 'components/Common/LeftBar';
