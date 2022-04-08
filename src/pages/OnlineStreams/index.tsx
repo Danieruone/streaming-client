@@ -15,6 +15,7 @@ import { SocketContext } from 'context/SocketProvider';
 interface User {
   name: string;
   image: string;
+  username: string;
 }
 
 export interface streamObject {
