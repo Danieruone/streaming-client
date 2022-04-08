@@ -1,6 +1,3 @@
-// router
-import { useLocation } from 'react-router-dom';
-
 // components
 import { LeftBar } from 'components/Common/LeftBar';
 import { Navbar } from 'components/Common/Navbar';
@@ -11,7 +8,11 @@ import { ProfileDescription } from 'components/Common/ProfileDescription';
 // styles
 import { Container, StreamingContainer } from './styles';
 
+import { useParams } from 'react-router-dom';
+
 export const StreamingPage = () => {
+  const { username } = useParams();
+
   return (
     <div>
       <div style={{ height: '3rem' }}>
@@ -23,7 +24,7 @@ export const StreamingPage = () => {
         </div>
         <StreamingContainer>
           <div style={{ overflowY: 'scroll', height: '100vh' }}>
-            {/* <VideoStream url={state.streaming_url || ''} /> */}
+            <VideoStream url={''} />
             <ProfileDescription />
           </div>
           <div>

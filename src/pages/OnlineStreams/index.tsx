@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // components
 import { Navbar } from 'components/Common/Navbar';
@@ -9,52 +9,13 @@ import { SkeletonStreamPreview } from 'components/Common/SkeletonStreamPreview';
 // styles
 import { Container, StreamsContainer } from './styles';
 
-// context
-import { SocketContext } from 'context/SocketProvider';
-
-interface User {
-  name: string;
-  image: string;
-}
-
-export interface streamObject {
-  id: string;
-  thumbnail: string;
-  title: string;
-  url: string;
-  user: User;
-}
+// state
+import { useRecoilValue } from 'recoil';
+import { streamsState } from 'state/atoms/Streams';
 
 export const OnlineStreams = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [streamsArray, setStreamsArray] = useState<streamObject[] | []>([]);
-
-  const { socket } = useContext(SocketContext);
-
-  useEffect(() => {
-    setIsLoading(true);
-    socket.on('streams', (streams: streamObject[]) => {
-      console.log('array streams: ', streams);
-      setStreamsArray(streams);
-      setIsLoading(false);
-    });
-  }, [socket]);
-
-  useEffect(() => {
-    socket.on('add-stream', (stream: streamObject) => {
-      console.log('new stream: ', stream);
-      setStreamsArray((prev) => [...prev, stream]);
-    });
-  }, [socket]);
-
-  useEffect(() => {
-    socket.on('remove-stream', (stream_id: string) => {
-      console.log('deleted stream: ', stream_id);
-      setStreamsArray((prev) =>
-        prev.filter((oldStream) => stream_id !== oldStream.id)
-      );
-    });
-  }, [socket]);
+  const [isLoading, setisLoading] = useState(false);
+  const streamsArray = useRecoilValue(streamsState);
 
   return (
     <div>

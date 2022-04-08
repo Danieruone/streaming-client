@@ -11,30 +11,12 @@ import {
   InfoContainer,
 } from './styles';
 
-import { useNavigate } from 'react-router-dom';
+// types
+import { StreamObject } from 'interfaces/StreeamObject';
 
-import { streamObject } from 'pages/OnlineStreams';
-
-export const StreamPreview: FC<streamObject> = ({
-  thumbnail,
-  title,
-  user,
-  url,
-}) => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/broadcaster', {
-      state: {
-        url,
-        title,
-        user,
-      },
-    });
-  };
-
+export const StreamPreview: FC<StreamObject> = ({ thumbnail, title, user }) => {
   return (
-    <Container onClick={() => handleClick()}>
+    <Container to={`/broadcaster/${user.username}`}>
       <ImageContainer>
         <DirectBadge>EN DIRECTO</DirectBadge>
         <img src={thumbnail} />

@@ -14,11 +14,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // styles
 import { Container, ExpandField } from './styles';
 
-// content
-import { streamersArray } from 'assets/content/streamers';
+// state
+import { useRecoilValue } from 'recoil';
+import { streamsState } from 'state/atoms/Streams';
 
 export const LeftBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const streamersArray = useRecoilValue(streamsState);
 
   const variants = {
     open: { width: 250 },

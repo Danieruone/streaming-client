@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
-export const Container = styled.div`
+export const Container = styled(Link)`
   height: 10rem;
   width: 20rem;
   margin: 1rem;
   margin-bottom: 5rem;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 `;
 
 export const ImageContainer = styled.div`
