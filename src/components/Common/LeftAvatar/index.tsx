@@ -6,36 +6,35 @@ import Tooltip from '@mui/material/Tooltip';
 import { Typography } from '@mui/material';
 
 // types
-import { LeftAvatarProps } from 'interfaces/components/LeftAvatar';
+import { StreamObject } from 'interfaces/StreeamObject';
 
 // styles
 import { Container } from './styles';
 
-export const LeftAvatar: FC<LeftAvatarProps> = ({
-  name,
-  streamTitle,
+export const LeftAvatar: FC<StreamObject & { isExpanded: boolean }> = ({
+  user,
+  title,
   isExpanded,
-  broadcaster_id,
 }) => {
   return (
-    <Container isExpanded={isExpanded} to={`/broadcaster/${broadcaster_id}`}>
+    <Container isExpanded={isExpanded} to={`/broadcaster/${user.username}`}>
       <Tooltip
-        title={isExpanded ? '' : name}
+        title={isExpanded ? '' : user.username}
         placement='right-start'
         style={{ marginRight: '1rem' }}
       >
-        <Avatar alt={name} sx={{ width: 32, height: 32 }} />
+        <Avatar alt={user.username} sx={{ width: 32, height: 32 }} />
       </Tooltip>
       <div>
         {isExpanded && (
           <>
             <Typography style={{ fontSize: '.9rem' }}>
-              <strong>{name}</strong>
+              <strong>{user.name}</strong>
             </Typography>
 
-            <Tooltip title={streamTitle} placement='right-start'>
+            <Tooltip title={title} placement='right-start'>
               <Typography style={{ fontSize: '.8rem', width: 180 }} noWrap>
-                {streamTitle}
+                {title}
               </Typography>
             </Tooltip>
           </>

@@ -11,9 +11,10 @@ import {
   InfoContainer,
 } from './styles';
 
-import { streamObject } from 'pages/OnlineStreams';
+// types
+import { StreamObject } from 'interfaces/StreeamObject';
 
-export const StreamPreview: FC<streamObject> = ({ thumbnail, title, user }) => {
+export const StreamPreview: FC<StreamObject> = ({ thumbnail, title, user }) => {
   return (
     <Container to={`/broadcaster/${user.username}`}>
       <ImageContainer>
