@@ -8,15 +8,15 @@ import { StreamObject } from 'interfaces/StreeamObject';
 
 // state
 import { useSetRecoilState } from 'recoil';
-import { streamsState } from 'state/atoms/Streams';
+import { streamsState, isFetchingStreams } from 'state/atoms/Streams';
 
 interface Props {
   children: any;
 }
 
 export const StreamsHandler: FC<Props> = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const setStreamsArray = useSetRecoilState(streamsState);
+  const setIsLoading = useSetRecoilState(isFetchingStreams);
 
   const { socket } = useContext(SocketContext);
 

@@ -11,11 +11,11 @@ import { Container, StreamsContainer } from './styles';
 
 // state
 import { useRecoilValue } from 'recoil';
-import { streamsState } from 'state/atoms/Streams';
+import { streamsState, isFetchingStreams } from 'state/atoms/Streams';
 
 export const OnlineStreams = () => {
-  const [isLoading, setisLoading] = useState(false);
   const streamsArray = useRecoilValue(streamsState);
+  const isLoading = useRecoilValue(isFetchingStreams);
 
   return (
     <div>
