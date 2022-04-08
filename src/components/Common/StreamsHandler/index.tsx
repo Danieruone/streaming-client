@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, FC } from 'react';
+import { useEffect, useContext, FC } from 'react';
 
 // context
 import { SocketContext } from 'context/SocketProvider';
@@ -11,7 +11,7 @@ import { useSetRecoilState } from 'recoil';
 import { streamsState, isFetchingStreams } from 'state/atoms/Streams';
 
 interface Props {
-  children: any;
+  children: JSX.Element;
 }
 
 export const StreamsHandler: FC<Props> = ({ children }) => {
@@ -45,5 +45,5 @@ export const StreamsHandler: FC<Props> = ({ children }) => {
     });
   }, [socket]);
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 };

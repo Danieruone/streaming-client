@@ -11,6 +11,7 @@ import { Container, StreamingContainer } from './styles';
 import { useParams } from 'react-router-dom';
 
 export const StreamingPage = () => {
+  // todo: get streaming info from username
   const { username } = useParams();
 
   return (
