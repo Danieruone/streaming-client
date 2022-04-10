@@ -24,6 +24,11 @@ import { isLoggedIn } from 'state/atoms/Auth';
 import { profileState } from 'state/atoms/Profile';
 import { authModalState } from 'state/atoms/AuthFormModal';
 
+interface LoginForm {
+  email: string;
+  password: string;
+}
+
 export const LoginForm = () => {
   const setLoginState = useSetRecoilState(isLoggedIn);
   const setAuthFormModal = useSetRecoilState(authModalState);
@@ -37,7 +42,7 @@ export const LoginForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: LoginForm | any) => {
     setIsLoading(true);
     logIn(values)
       .then(({ data }) => {
