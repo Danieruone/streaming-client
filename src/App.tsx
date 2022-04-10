@@ -16,11 +16,16 @@ function App() {
     <RecoilRoot>
       <SocketProvider>
         <StreamsHandler>
-          <Routes>
-            <Route path='/' element={<OnlineStreams />} />
-            <Route path='/broadcaster/:username' element={<StreamingPage />} />
-          </Routes>
-          <AuthFormModal />
+          <>
+            <Routes>
+              <Route path='/' element={<OnlineStreams />} />
+              <Route
+                path='/broadcaster/:username'
+                element={<StreamingPage />}
+              />
+            </Routes>
+            <AuthFormModal />
+          </>
         </StreamsHandler>
       </SocketProvider>
     </RecoilRoot>
