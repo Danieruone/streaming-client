@@ -4,8 +4,11 @@ import { LeftBar } from 'components/Common/LeftBar';
 import { StreamPreview } from 'components/Common/StreamPreview';
 import { SkeletonStreamPreview } from 'components/Common/SkeletonStreamPreview';
 
+// icons
+import HourglassDisabledIcon from '@mui/icons-material/HourglassDisabled';
+
 // styles
-import { Container, StreamsContainer } from './styles';
+import { Container, StreamsContainer, NoStreamsContainer } from './styles';
 
 // state
 import { useRecoilValue } from 'recoil';
@@ -37,9 +40,18 @@ export const OnlineStreams = () => {
             </>
           ) : (
             <>
-              {streamsArray.map((stream) => (
-                <StreamPreview key={stream.id} {...stream} />
-              ))}
+              {streamsArray.length < 0 ? (
+                streamsArray.map((stream) => (
+                  <StreamPreview key={stream.id} {...stream} />
+                ))
+              ) : (
+                <NoStreamsContainer>
+                  <HourglassDisabledIcon
+                    style={{ fontSize: 50, color: 'gray' }}
+                  />
+                  <h1>No streams available</h1>
+                </NoStreamsContainer>
+              )}
             </>
           )}
         </StreamsContainer>
