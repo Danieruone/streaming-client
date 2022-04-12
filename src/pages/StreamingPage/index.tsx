@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 // components
 import { LeftBar } from 'components/Common/LeftBar';
 import { Navbar } from 'components/Common/Navbar';
@@ -8,11 +10,22 @@ import { ProfileDescription } from 'components/Common/ProfileDescription';
 // styles
 import { Container, StreamingContainer } from './styles';
 
+// router
 import { useParams } from 'react-router-dom';
 
+// services
+import { getStreamByUsername } from 'services/Stream';
+
+// types
+import { StreamObject } from 'interfaces/StreeamObject';
+
 export const StreamingPage = () => {
-  // todo: get streaming info from username
+  const [userData, setUserData] = useState<StreamObject>();
   const { username } = useParams();
+
+  useEffect(() => {
+    getStreamByUsername(username || '').then(({ data }) => setUserData(data));
+  }, []);
 
   return (
     <div>
@@ -25,8 +38,15 @@ export const StreamingPage = () => {
         </div>
         <StreamingContainer>
           <div style={{ overflowY: 'scroll', height: '100vh' }}>
-            <VideoStream url={''} />
-            <ProfileDescription />
+            {userData && (
+              <>
+                <VideoStream url={userData?.url} />
+                <ProfileDescription
+                  username={userData?.username}
+                  title={userData?.title}
+                />
+              </>
+            )}
           </div>
           <div>
             <Chat />
