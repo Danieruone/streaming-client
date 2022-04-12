@@ -19,15 +19,24 @@ import {
 interface Props {
   username: string;
   title: string;
+  userpicture: string;
 }
 
-export const ProfileDescription: FC<Props> = ({ username, title }) => {
+export const ProfileDescription: FC<Props> = ({
+  username,
+  title,
+  userpicture,
+}) => {
   return (
     <Container>
       <TopDescription>
         <Profile>
           <AvatarCircle>
-            <Avatar alt='Test' sx={{ width: 60, height: 60 }} />
+            <Avatar
+              alt='Test'
+              src={userpicture || ''}
+              sx={{ width: 60, height: 60 }}
+            />
           </AvatarCircle>
 
           <div>

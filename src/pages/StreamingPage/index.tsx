@@ -44,6 +44,7 @@ export const StreamingPage = () => {
                 <ProfileDescription
                   username={userData?.username}
                   title={userData?.title}
+                  userpicture={userData?.userpicture}
                 />
               </>
             )}
