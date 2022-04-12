@@ -40,7 +40,7 @@ export const OnlineStreams = () => {
             </>
           ) : (
             <>
-              {streamsArray.length < 0 ? (
+              {streamsArray.length > 0 ? (
                 streamsArray.map((stream) => (
                   <StreamPreview key={stream.id} {...stream} />
                 ))

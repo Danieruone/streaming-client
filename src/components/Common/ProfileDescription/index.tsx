@@ -16,9 +16,6 @@ import {
   Viwers,
 } from './styles';
 
-// state
-import { useRecoilValue } from 'recoil';
-
 export const ProfileDescription = () => {
   return (
     <Container>

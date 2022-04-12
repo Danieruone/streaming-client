@@ -12,24 +12,24 @@ import { StreamObject } from 'interfaces/StreeamObject';
 import { Container } from './styles';
 
 export const LeftAvatar: FC<StreamObject & { isExpanded: boolean }> = ({
-  user,
+  username,
   title,
   isExpanded,
 }) => {
   return (
-    <Container isExpanded={isExpanded} to={`/broadcaster/${user.username}`}>
+    <Container isExpanded={isExpanded} to={`/broadcaster/${username}`}>
       <Tooltip
-        title={isExpanded ? '' : user.username}
+        title={isExpanded ? '' : username}
         placement='right-start'
         style={{ marginRight: '1rem' }}
       >
-        <Avatar alt={user.username} sx={{ width: 32, height: 32 }} />
+        <Avatar alt={username} sx={{ width: 32, height: 32 }} />
       </Tooltip>
       <div>
         {isExpanded && (
           <>
             <Typography style={{ fontSize: '.9rem' }}>
-              <strong>{user.name}</strong>
+              <strong>{username}</strong>
             </Typography>
 
             <Tooltip title={title} placement='right-start'>

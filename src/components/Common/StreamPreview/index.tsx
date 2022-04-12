@@ -14,20 +14,25 @@ import {
 // types
 import { StreamObject } from 'interfaces/StreeamObject';
 
-export const StreamPreview: FC<StreamObject> = ({ thumbnail, title, user }) => {
+export const StreamPreview: FC<StreamObject> = ({
+  thumbnail,
+  title,
+  username,
+  userpicture,
+}) => {
   return (
-    <Container to={`/broadcaster/${user.username}`}>
+    <Container to={`/broadcaster/${username}`}>
       <ImageContainer>
         <DirectBadge>EN DIRECTO</DirectBadge>
         <img src={thumbnail} />
       </ImageContainer>
       <InfoContainer>
-        <Avatar src={user.image} />
+        <Avatar src={userpicture} />
         <div style={{ marginLeft: '1rem' }}>
           <Typography variant='body2'>
             <strong>{title}</strong>
           </Typography>
-          <Typography variant='body2'>{user.name}</Typography>
+          <Typography variant='body2'>{username}</Typography>
         </div>
       </InfoContainer>
     </Container>
