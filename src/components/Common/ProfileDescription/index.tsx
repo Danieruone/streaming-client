@@ -16,7 +16,12 @@ import {
   Viwers,
 } from './styles';
 
-export const ProfileDescription = () => {
+interface Props {
+  username: string;
+  title: string;
+}
+
+export const ProfileDescription: FC<Props> = ({ username, title }) => {
   return (
     <Container>
       <TopDescription>
@@ -26,8 +31,8 @@ export const ProfileDescription = () => {
           </AvatarCircle>
 
           <div>
-            {/* <Typography variant='h6'>{name}</Typography>
-            <Typography variant='body2'>{title}</Typography> */}
+            <Typography variant='h6'>{username || ''}</Typography>
+            <Typography variant='body2'>{title || ''}</Typography>
 
             <Stack direction='row' spacing={1} style={{ marginTop: 5 }}>
               <Chip label='Games' />

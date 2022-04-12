@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // components
 import { LeftBar } from 'components/Common/LeftBar';
@@ -16,12 +16,15 @@ import { useParams } from 'react-router-dom';
 // services
 import { getStreamByUsername } from 'services/Stream';
 
+// types
+import { StreamObject } from 'interfaces/StreeamObject';
+
 export const StreamingPage = () => {
-  // todo: get streaming info from username
+  const [userData, setUserData] = useState<StreamObject>();
   const { username } = useParams();
 
   useEffect(() => {
-    getStreamByUsername(username || '').then((data) => console.log(data));
+    getStreamByUsername(username || '').then(({ data }) => setUserData(data));
   }, []);
 
   return (
@@ -35,8 +38,15 @@ export const StreamingPage = () => {
         </div>
         <StreamingContainer>
           <div style={{ overflowY: 'scroll', height: '100vh' }}>
-            <VideoStream url={''} />
-            <ProfileDescription />
+            {userData && (
+              <>
+                <VideoStream url={userData?.url} />
+                <ProfileDescription
+                  username={userData?.username}
+                  title={userData?.title}
+                />
+              </>
+            )}
           </div>
           <div>
             <Chat />
