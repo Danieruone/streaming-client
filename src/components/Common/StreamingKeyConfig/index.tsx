@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 // UI
 import { Typography } from '@mui/material';
@@ -13,14 +14,17 @@ import { Container, KeyBox } from './styles';
 
 export const StreamingKeyConfig = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [streamingKey, setStreamingKey] = useState('***************');
+
+  const notify = (e: any) => toast.error(e);
 
   const getStreamingKeyMethod = () => {
     setIsLoading(true);
     getStreamingKey()
       .then((data) => {
-        console.log(data);
+        setStreamingKey(data.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => notify(err.message))
       .finally(() => setIsLoading(false));
   };
 
@@ -47,7 +51,7 @@ export const StreamingKeyConfig = () => {
       </Button>
 
       <KeyBox>
-        <strong>****************</strong>
+        <strong>{streamingKey}</strong>
       </KeyBox>
     </Container>
   );

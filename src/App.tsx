@@ -4,6 +4,10 @@ import { RecoilRoot } from 'recoil';
 // router
 import { Routes, Route } from 'react-router-dom';
 
+// toast
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // components
 import { StreamingPage } from 'pages/StreamingPage';
 import { OnlineStreams } from 'pages/OnlineStreams';
@@ -24,6 +28,7 @@ function App() {
                 element={<StreamingPage />}
               />
             </Routes>
+            <ToastContainer position='bottom-right' />
             <AuthFormModal />
           </>
         </StreamsHandler>
