@@ -3,23 +3,27 @@ import { useState } from 'react';
 // UI
 import { Typography } from '@mui/material';
 import { Button } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+
+// services
+import { getStreamingKey } from 'services/Stream';
 
 // styles
-import styled from '@emotion/styled';
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const KeyBox = styled.div`
-  border: 1px solid gray;
-  text-align: center;
-  margin-top: 1rem;
-  padding: 10px;
-`;
+import { Container, KeyBox } from './styles';
 
 export const StreamingKeyConfig = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getStreamingKeyMethod = () => {
+    setIsLoading(true);
+    getStreamingKey()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+  };
+
   return (
     <Container>
       <Typography variant='h6'>Your streaming key</Typography>
@@ -33,9 +37,13 @@ export const StreamingKeyConfig = () => {
         variant='outlined'
         color='warning'
         size='small'
-        // onClick={() => setAuthModalState(true)}
+        onClick={() => getStreamingKeyMethod()}
       >
-        Get streaming key
+        {isLoading ? (
+          <CircularProgress color='warning' size={30} />
+        ) : (
+          <>Get streaming key</>
+        )}
       </Button>
 
       <KeyBox>

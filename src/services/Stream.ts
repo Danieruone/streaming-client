@@ -5,5 +5,5 @@ export const getStreamByUsername = (payload: String) => {
 };
 
 export const getStreamingKey = () => {
-  return axios.get(`${import.meta.env.VITE_BASE_URL}stream/`);
+  return axios.get(`${import.meta.env.VITE_BASE_URL}stream/key`);
 };
