@@ -14,6 +14,7 @@ import { Container } from './styles';
 export const LeftAvatar: FC<StreamObject & { isExpanded: boolean }> = ({
   username,
   title,
+  userpicture,
   isExpanded,
 }) => {
   return (
@@ -23,7 +24,11 @@ export const LeftAvatar: FC<StreamObject & { isExpanded: boolean }> = ({
         placement='right-start'
         style={{ marginRight: '1rem' }}
       >
-        <Avatar alt={username} sx={{ width: 32, height: 32 }} />
+        <Avatar
+          alt={userpicture}
+          src={userpicture}
+          sx={{ width: 32, height: 32 }}
+        />
       </Tooltip>
       <div>
         {isExpanded && (

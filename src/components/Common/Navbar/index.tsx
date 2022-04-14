@@ -13,6 +13,10 @@ import MenuItem from '@mui/material/MenuItem';
 // router
 import { Link } from 'react-router-dom';
 
+// components
+import { ModalComponent } from 'components/Shared/ModalComponent';
+import { StreamingKeyConfig } from '../StreamingKeyConfig';
+
 // styles
 import {
   Container,
@@ -31,6 +35,9 @@ export const Navbar = () => {
   const [isLoggedInState, setIsLoggedInState] = useRecoilState(isLoggedIn);
   const setAuthModalState = useSetRecoilState(authModalState);
 
+  // modal
+  const [streamingKeyModal, setStreamingKeyModal] = useState(false);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -45,60 +52,72 @@ export const Navbar = () => {
   };
 
   return (
-    <Container>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Icon>
-          <img src={icon} />
-        </Icon>
+    <>
+      <Container>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Icon>
+            <img src={icon} />
+          </Icon>
 
-        <NavOptions>
-          <Link to='/' style={{ textDecoration: 'none' }}>
-            <Typography
-              variant='h6'
-              style={{
-                margin: '0px 30px 0px 20px',
-                fontSize: '1rem',
-                color: 'black',
-              }}
-            >
-              Explorar
+          <NavOptions>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              <Typography
+                variant='h6'
+                style={{
+                  margin: '0px 30px 0px 20px',
+                  fontSize: '1rem',
+                  color: 'black',
+                }}
+              >
+                Explorar
+              </Typography>
+            </Link>
+            <Typography variant='h6' style={{ fontSize: '1rem' }}>
+              Instrucciones
             </Typography>
-          </Link>
-          <Typography variant='h6' style={{ fontSize: '1rem' }}>
-            Instrucciones
-          </Typography>
-        </NavOptions>
-      </div>
+          </NavOptions>
+        </div>
 
-      {isLoggedInState ? (
-        <>
-          <ProfileContainer onClick={handleClick}>
-            {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-            <Avatar sx={{ width: 32, height: 32 }} />
-          </ProfileContainer>
-          <Menu
-            id='basic-menu'
-            anchorEl={anchorEl}
-            open={open}
-            onClose={() => setAnchorEl(null)}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-            PaperProps={PaperStyles}
+        {isLoggedInState ? (
+          <>
+            <ProfileContainer onClick={handleClick}>
+              {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+              <Avatar sx={{ width: 32, height: 32 }} />
+            </ProfileContainer>
+            <Menu
+              id='basic-menu'
+              anchorEl={anchorEl}
+              open={open}
+              onClose={() => setAnchorEl(null)}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+              PaperProps={PaperStyles}
+            >
+              <MenuItem onClick={() => setStreamingKeyModal(true)}>
+                Streaming key
+              </MenuItem>
+              <MenuItem onClick={Logout}>Logout</MenuItem>
+            </Menu>
+          </>
+        ) : (
+          <Button
+            variant='outlined'
+            color='warning'
+            size='small'
+            onClick={() => setAuthModalState(true)}
           >
-            <MenuItem onClick={Logout}>Logout</MenuItem>
-          </Menu>
-        </>
-      ) : (
-        <Button
-          variant='outlined'
-          color='warning'
-          size='small'
-          onClick={() => setAuthModalState(true)}
-        >
-          Login / SignUp
-        </Button>
-      )}
-    </Container>
+            Login / SignUp
+          </Button>
+        )}
+      </Container>
+
+      <ModalComponent
+        isOpen={streamingKeyModal}
+        setIsOpen={() => setStreamingKeyModal(false)}
+      >
+        <StreamingKeyConfig />
+      </ModalComponent>
+    </>
   );
 };
