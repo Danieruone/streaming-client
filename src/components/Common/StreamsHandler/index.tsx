@@ -37,10 +37,10 @@ export const StreamsHandler: FC<Props> = ({ children }) => {
   }, [socket]);
 
   useEffect(() => {
-    socket.on('remove-stream', (stream_id: string) => {
-      console.log('deleted stream: ', stream_id);
+    socket.on('remove-stream', (username: string) => {
+      console.log('deleted stream: ', username);
       setStreamsArray((prev) =>
-        prev.filter((oldStream) => stream_id !== oldStream.id)
+        prev.filter((oldStream) => username !== oldStream.username)
       );
     });
   }, [socket]);
