@@ -19,7 +19,7 @@ interface Props {
 export const StreamsHandler: FC<Props> = ({ children }) => {
   const setStreamsArray = useSetRecoilState(streamsState);
   const setIsLoading = useSetRecoilState(isFetchingStreams);
-  const [chatMessages, setChatRoomMessages] = useRecoilState(chatRoomMessages);
+  const setChatRoomMessages = useSetRecoilState(chatRoomMessages);
 
   const { socket } = useContext(SocketContext);
 
@@ -50,8 +50,7 @@ export const StreamsHandler: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     socket.on('roomMessage', (message: Message) => {
-      console.log('new message: ', message);
-      setChatRoomMessages([...chatMessages, message]);
+      setChatRoomMessages((prev) => [...prev, message]);
     });
   }, [socket]);
 
