@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-const token = localStorage.getItem('acces_token');
+const token = localStorage.getItem('access_token');
 
 export const isLoggedIn = atom({
   key: 'isLoggedIn',

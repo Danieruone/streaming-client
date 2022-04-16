@@ -5,10 +5,12 @@ import { SocketContext } from 'context/SocketProvider';
 
 // types
 import { StreamObject } from 'interfaces/StreeamObject';
+import { Message } from 'interfaces/Message';
 
 // state
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import { streamsState, isFetchingStreams } from 'state/atoms/Streams';
+import { chatRoomMessages } from 'state/atoms/Chat';
 
 interface Props {
   children: JSX.Element;
@@ -17,6 +19,7 @@ interface Props {
 export const StreamsHandler: FC<Props> = ({ children }) => {
   const setStreamsArray = useSetRecoilState(streamsState);
   const setIsLoading = useSetRecoilState(isFetchingStreams);
+  const setChatRoomMessages = useSetRecoilState(chatRoomMessages);
 
   const { socket } = useContext(SocketContext);
 
@@ -42,6 +45,12 @@ export const StreamsHandler: FC<Props> = ({ children }) => {
       setStreamsArray((prev) =>
         prev.filter((oldStream) => username !== oldStream.username)
       );
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on('roomMessage', (message: Message) => {
+      setChatRoomMessages((prev) => [...prev, message]);
     });
   }, [socket]);
 
