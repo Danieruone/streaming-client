@@ -46,7 +46,7 @@ export const LoginForm = () => {
     setIsLoading(true);
     logIn(values)
       .then(({ data }) => {
-        localStorage.setItem('acces_token', data.token);
+        localStorage.setItem('access_token', data.token);
         localStorage.setItem('user_data', JSON.stringify(data.user));
         setProfileState({ ...profile, ...data.user });
         setLoginState(true);

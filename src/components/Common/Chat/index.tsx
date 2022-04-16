@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
 
 // UI
 import { Typography } from '@mui/material';
@@ -9,8 +9,14 @@ import SendIcon from '@mui/icons-material/Send';
 // components
 import { MessageComponent } from 'components/Common/MessageComponent';
 
+// router
+import { useParams } from 'react-router-dom';
+
 // styles
 import { Container, TopChat, ChatContainer, InputContainer } from './styles';
+
+// context
+import { SocketContext } from 'context/SocketProvider';
 
 // state
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -20,6 +26,9 @@ import { isLoggedIn } from 'state/atoms/Auth';
 import { authModalState } from 'state/atoms/AuthFormModal';
 
 export const Chat = () => {
+  const { socket } = useContext(SocketContext);
+  const { username } = useParams();
+
   const chatScrollbar: any = useRef(null);
 
   // state
@@ -34,10 +43,13 @@ export const Chat = () => {
     e.preventDefault();
     if (isLoggedState) {
       if (message !== '') {
-        setRoomMessages([
-          ...roomMessages,
-          { name: profile.name, message, userColor: profile.chatStreamColor },
-        ]);
+        const messageToSend = {
+          username: profile.name,
+          message,
+          userColor: profile.chatStreamColor,
+          room: username || '',
+        };
+        socket.emit('roomMessage', messageToSend);
         setMessage('');
       }
     } else {
@@ -50,6 +62,15 @@ export const Chat = () => {
       chatScrollbar.current.offsetTop + chatScrollbar.current.offsetHeight;
     chatScrollbar.current.scrollTo({ top: offsetBottom });
   }, [roomMessages]);
+
+  // join to room
+  useEffect(() => {
+    socket.emit('joinRoom', username);
+    return () => {
+      setRoomMessages([]);
+      socket.emit('leaveRoom', username);
+    };
+  }, []);
 
   return (
     <Container>

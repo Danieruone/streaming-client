@@ -1,5 +1,6 @@
 export interface Message {
-  name: string;
+  username: string;
+  room: string;
   message: string;
   userColor: string;
 }
