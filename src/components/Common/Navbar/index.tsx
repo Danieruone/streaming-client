@@ -55,9 +55,11 @@ export const Navbar = () => {
     <>
       <Container>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Icon>
-            <img src={icon} />
-          </Icon>
+          <Link to='/' style={{ textDecoration: 'none' }}>
+            <Icon>
+              <img src={icon} />
+            </Icon>
+          </Link>
 
           <NavOptions>
             <Link to='/' style={{ textDecoration: 'none' }}>
@@ -69,12 +71,9 @@ export const Navbar = () => {
                   color: 'black',
                 }}
               >
-                Explorar
+                Explore
               </Typography>
             </Link>
-            <Typography variant='h6' style={{ fontSize: '1rem' }}>
-              Instrucciones
-            </Typography>
           </NavOptions>
         </div>
 
