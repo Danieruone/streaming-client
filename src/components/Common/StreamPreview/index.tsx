@@ -21,7 +21,7 @@ export const StreamPreview: FC<StreamObject> = ({
   userpicture,
 }) => {
   return (
-    <Container to={`/${username}`}>
+    <Container to={`/streamer/${username}`}>
       <ImageContainer>
         <DirectBadge>EN DIRECTO</DirectBadge>
         <img src={thumbnail} />

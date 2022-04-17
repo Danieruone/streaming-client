@@ -8,7 +8,7 @@ import { StreamObject } from 'interfaces/StreeamObject';
 import { Message } from 'interfaces/Message';
 
 // state
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { streamsState, isFetchingStreams } from 'state/atoms/Streams';
 import { chatRoomMessages } from 'state/atoms/Chat';
 

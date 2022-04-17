@@ -18,7 +18,7 @@ export const LeftAvatar: FC<StreamObject & { isExpanded: boolean }> = ({
   isExpanded,
 }) => {
   return (
-    <Container isExpanded={isExpanded} to={`/${username}`}>
+    <Container isExpanded={isExpanded} to={`/streamer/${username}`}>
       <Tooltip
         title={isExpanded ? '' : username}
         placement='right-start'
