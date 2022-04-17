@@ -34,13 +34,11 @@ export const StreamingKeyConfig = () => {
   };
 
   const refreshStreamingKeyMethod = () => {
-    setIsLoading(true);
     refreshStreamingKey()
       .then((data) => {
         setStreamingKey(data.data);
       })
-      .catch((err) => notify(err.message))
-      .finally(() => setIsLoading(false));
+      .catch((err) => notify(err.message));
   };
 
   return (
