@@ -7,10 +7,11 @@ import { VideoStream } from 'components/Common/VideoStream';
 import { Chat } from 'components/Common/Chat';
 import { ProfileDescription } from 'components/Common/ProfileDescription';
 
+// UI
+import { CircularProgress } from '@mui/material';
+
 // styles
 import { Container, StreamingContainer, NotFoundContainer } from './styles';
-
-// img
 import NotFoundIcon from 'assets/icons/404-error.png';
 
 // router
@@ -24,10 +25,13 @@ import { StreamObject } from 'interfaces/StreeamObject';
 
 export const StreamingPage = () => {
   const [userData, setUserData] = useState<StreamObject>();
+  const [isLoading, setIsLoading] = useState(true);
   const { username } = useParams();
 
   useEffect(() => {
-    getStreamByUsername(username || '').then(({ data }) => setUserData(data));
+    getStreamByUsername(username || '')
+      .then(({ data }) => setUserData(data))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -39,7 +43,11 @@ export const StreamingPage = () => {
         <div>
           <LeftBar />
         </div>
-        {userData ? (
+        {isLoading ? (
+          <div style={{ position: 'absolute', left: '50%', top: '35%' }}>
+            <CircularProgress color='warning' />
+          </div>
+        ) : userData ? (
           <StreamingContainer>
             <div style={{ overflowY: 'scroll', height: '100vh' }}>
               <>

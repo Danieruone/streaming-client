@@ -26,4 +26,7 @@ export const NotFoundContainer = styled.div`
   & img {
     width: 100%;
   }
+  & h1 {
+    font-weight: 300;
+  }
 `;
