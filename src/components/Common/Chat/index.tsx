@@ -44,7 +44,7 @@ export const Chat = () => {
     if (isLoggedState) {
       if (message !== '') {
         const messageToSend = {
-          username: profile.name,
+          username: profile.username,
           message,
           userColor: profile.chatStreamColor,
           room: username || '',

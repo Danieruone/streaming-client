@@ -8,8 +8,6 @@ export const profileState = atom({
   key: 'profileState',
   default: {
     ...profile,
-    name: 'DaruLive',
-    streamDescription: 'Jugando aquí lolsito, entren para divertirse',
     chatStreamColor: `#${randomColor}`,
   },
 });
