@@ -36,7 +36,12 @@ export const StreamingPage = () => {
 
   return (
     <div>
-      <div style={{ height: '3rem' }}>
+      <div
+        style={{
+          height: '3rem',
+          boxShadow: userData ? '' : '#6c6666 -1px 1px 4px 1px',
+        }}
+      >
         <Navbar />
       </div>
       <Container>
