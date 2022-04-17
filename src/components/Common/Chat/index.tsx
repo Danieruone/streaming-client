@@ -76,7 +76,7 @@ export const Chat = () => {
     <Container>
       <TopChat>
         <Typography style={{ fontSize: '.8rem' }} variant='h6'>
-          CHAT DEL STREAM
+          STREAM CHAT
         </Typography>
       </TopChat>
       <ChatContainer ref={chatScrollbar}>
@@ -88,7 +88,7 @@ export const Chat = () => {
               marginTop: '3rem',
             }}
           >
-            <span>Sé el primero en enviar un mensaje</span>
+            <span>Be the first sending a message</span>
           </div>
         )}
 

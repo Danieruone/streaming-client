@@ -12,6 +12,9 @@ import { getStreamingKey } from 'services/Stream';
 // styles
 import { Container, KeyBox } from './styles';
 
+// img
+import StreamSettings from 'assets/content/stream_settings.png';
+
 export const StreamingKeyConfig = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [streamingKey, setStreamingKey] = useState('***************');
@@ -36,6 +39,10 @@ export const StreamingKeyConfig = () => {
         <li>Paste your streaming key</li>
         <li>Start streaming!</li>
       </ul>
+
+      <div style={{ marginBottom: '1rem' }}>
+        <img src={StreamSettings} />
+      </div>
 
       <Button
         variant='outlined'
