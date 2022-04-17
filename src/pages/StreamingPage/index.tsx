@@ -7,8 +7,12 @@ import { VideoStream } from 'components/Common/VideoStream';
 import { Chat } from 'components/Common/Chat';
 import { ProfileDescription } from 'components/Common/ProfileDescription';
 
+// UI
+import { CircularProgress } from '@mui/material';
+
 // styles
-import { Container, StreamingContainer } from './styles';
+import { Container, StreamingContainer, NotFoundContainer } from './styles';
+import NotFoundIcon from 'assets/icons/404-error.png';
 
 // router
 import { useParams } from 'react-router-dom';
@@ -21,24 +25,36 @@ import { StreamObject } from 'interfaces/StreeamObject';
 
 export const StreamingPage = () => {
   const [userData, setUserData] = useState<StreamObject>();
+  const [isLoading, setIsLoading] = useState(true);
   const { username } = useParams();
 
   useEffect(() => {
-    getStreamByUsername(username || '').then(({ data }) => setUserData(data));
+    getStreamByUsername(username || '')
+      .then(({ data }) => setUserData(data))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <div>
-      <div style={{ height: '3rem' }}>
+      <div
+        style={{
+          height: '3rem',
+          boxShadow: userData ? '' : '#6c6666 -1px 1px 4px 1px',
+        }}
+      >
         <Navbar />
       </div>
       <Container>
         <div>
           <LeftBar />
         </div>
-        <StreamingContainer>
-          <div style={{ overflowY: 'scroll', height: '100vh' }}>
-            {userData && (
+        {isLoading ? (
+          <div style={{ position: 'absolute', left: '50%', top: '35%' }}>
+            <CircularProgress color='warning' />
+          </div>
+        ) : userData ? (
+          <StreamingContainer>
+            <div style={{ overflowY: 'scroll', height: '100vh' }}>
               <>
                 <VideoStream url={userData?.url} />
                 <ProfileDescription
@@ -47,12 +63,19 @@ export const StreamingPage = () => {
                   userpicture={userData?.userpicture}
                 />
               </>
-            )}
-          </div>
-          <div>
-            <Chat />
-          </div>
-        </StreamingContainer>
+            </div>
+            <div>
+              <Chat />
+            </div>
+          </StreamingContainer>
+        ) : (
+          <NotFoundContainer>
+            <div>
+              <img src={NotFoundIcon} />
+            </div>
+            <h1>Stream not found</h1>
+          </NotFoundContainer>
+        )}
       </Container>
     </div>
   );
