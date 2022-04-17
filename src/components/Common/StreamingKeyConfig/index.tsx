@@ -4,10 +4,12 @@ import { toast } from 'react-toastify';
 // UI
 import { Typography } from '@mui/material';
 import { Button } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+import CachedIcon from '@mui/icons-material/Cached';
 
 // services
-import { getStreamingKey } from 'services/Stream';
+import { getStreamingKey, refreshStreamingKey } from 'services/Stream';
 
 // styles
 import { Container, KeyBox } from './styles';
@@ -17,13 +19,23 @@ import StreamSettings from 'assets/content/stream_settings.png';
 
 export const StreamingKeyConfig = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [streamingKey, setStreamingKey] = useState('***************');
+  const [streamingKey, setStreamingKey] = useState(null);
 
   const notify = (e: any) => toast.error(e);
 
   const getStreamingKeyMethod = () => {
     setIsLoading(true);
     getStreamingKey()
+      .then((data) => {
+        setStreamingKey(data.data);
+      })
+      .catch((err) => notify(err.message))
+      .finally(() => setIsLoading(false));
+  };
+
+  const refreshStreamingKeyMethod = () => {
+    setIsLoading(true);
+    refreshStreamingKey()
       .then((data) => {
         setStreamingKey(data.data);
       })
@@ -58,7 +70,19 @@ export const StreamingKeyConfig = () => {
       </Button>
 
       <KeyBox>
-        <strong>{streamingKey}</strong>
+        <strong>{streamingKey ? streamingKey : '******************'}</strong>
+        {streamingKey && (
+          <Tooltip
+            title={'Refresh streaming key'}
+            placement='bottom'
+            style={{ marginRight: '1rem' }}
+          >
+            <CachedIcon
+              onClick={() => refreshStreamingKeyMethod()}
+              sx={{ color: 'gray', marginLeft: '1rem', cursor: 'pointer' }}
+            />
+          </Tooltip>
+        )}
       </KeyBox>
     </Container>
   );

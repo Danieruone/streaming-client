@@ -12,3 +12,12 @@ export const getStreamingKey = () => {
     },
   });
 };
+
+export const refreshStreamingKey = () => {
+  const token = localStorage.getItem('access_token');
+  return axios.get(`${import.meta.env.VITE_BASE_URL}stream/key/restore`, {
+    headers: {
+      Authorization: 'Bearer ' + token || '',
+    },
+  });
+};

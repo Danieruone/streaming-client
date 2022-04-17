@@ -10,4 +10,7 @@ export const KeyBox = styled.div`
   text-align: center;
   margin-top: 1rem;
   padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
