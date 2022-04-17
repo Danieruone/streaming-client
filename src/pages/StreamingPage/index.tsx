@@ -8,7 +8,10 @@ import { Chat } from 'components/Common/Chat';
 import { ProfileDescription } from 'components/Common/ProfileDescription';
 
 // styles
-import { Container, StreamingContainer } from './styles';
+import { Container, StreamingContainer, NotFoundContainer } from './styles';
+
+// img
+import NotFoundIcon from 'assets/icons/404-error.png';
 
 // router
 import { useParams } from 'react-router-dom';
@@ -36,9 +39,9 @@ export const StreamingPage = () => {
         <div>
           <LeftBar />
         </div>
-        <StreamingContainer>
-          <div style={{ overflowY: 'scroll', height: '100vh' }}>
-            {userData && (
+        {userData ? (
+          <StreamingContainer>
+            <div style={{ overflowY: 'scroll', height: '100vh' }}>
               <>
                 <VideoStream url={userData?.url} />
                 <ProfileDescription
@@ -47,12 +50,19 @@ export const StreamingPage = () => {
                   userpicture={userData?.userpicture}
                 />
               </>
-            )}
-          </div>
-          <div>
-            <Chat />
-          </div>
-        </StreamingContainer>
+            </div>
+            <div>
+              <Chat />
+            </div>
+          </StreamingContainer>
+        ) : (
+          <NotFoundContainer>
+            <div>
+              <img src={NotFoundIcon} />
+            </div>
+            <h1>Stream not found</h1>
+          </NotFoundContainer>
+        )}
       </Container>
     </div>
   );

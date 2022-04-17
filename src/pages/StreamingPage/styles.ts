@@ -13,3 +13,17 @@ export const StreamingContainer = styled.div`
   height: 90vh;
   grid-template-columns: 80% 20%;
 `;
+
+export const NotFoundContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+  & div {
+    width: 200px;
+  }
+  & img {
+    width: 100%;
+  }
+`;
