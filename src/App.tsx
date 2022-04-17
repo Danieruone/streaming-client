@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // components
 import { StreamingPage } from 'pages/StreamingPage';
 import { OnlineStreams } from 'pages/OnlineStreams';
+import { NoMatchPage } from 'pages/NoMatchPage';
 import { SocketProvider } from 'context/SocketProvider';
 import { AuthFormModal } from 'components/Shared/AuthFormModal';
 import { StreamsHandler } from 'components/Common/StreamsHandler';
@@ -23,10 +24,8 @@ function App() {
           <>
             <Routes>
               <Route path='/' element={<OnlineStreams />} />
-              <Route
-                path='/broadcaster/:username'
-                element={<StreamingPage />}
-              />
+              <Route path='/:username' element={<StreamingPage />} />
+              <Route path='*' element={<NoMatchPage />} />
             </Routes>
             <ToastContainer position='bottom-right' />
             <AuthFormModal />
