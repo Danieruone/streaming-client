@@ -24,7 +24,7 @@ function App() {
           <>
             <Routes>
               <Route path='/' element={<OnlineStreams />} />
-              <Route path='/streamer/:username' element={<StreamingPage />} />
+              <Route path='/:username' element={<StreamingPage />} />
               <Route path='*' element={<NoMatchPage />} />
             </Routes>
             <ToastContainer position='bottom-right' />
