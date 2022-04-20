@@ -26,7 +26,6 @@ export const StreamsHandler: FC<Props> = ({ children }) => {
   useEffect(() => {
     setIsLoading(true);
     socket.on('streams', (streams: StreamObject[]) => {
-      console.log('array streams: ', streams);
       setStreamsArray(streams);
       setIsLoading(false);
     });
@@ -41,7 +40,6 @@ export const StreamsHandler: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     socket.on('remove-stream', (username: string) => {
-      console.log('deleted stream: ', username);
       setStreamsArray((prev) =>
         prev.filter((oldStream) => username !== oldStream.username)
       );
