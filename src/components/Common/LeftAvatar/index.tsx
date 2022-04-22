@@ -25,7 +25,7 @@ export const LeftAvatar: FC<StreamObject & { isExpanded: boolean }> = ({
         style={{ marginRight: '1rem' }}
       >
         <Avatar
-          alt={userpicture}
+          alt={username}
           src={userpicture}
           sx={{ width: 32, height: 32 }}
         />
