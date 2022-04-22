@@ -33,7 +33,7 @@ export const ProfileDescription: FC<Props> = ({
         <Profile>
           <AvatarCircle>
             <Avatar
-              alt='Test'
+              alt={username}
               src={userpicture || ''}
               sx={{ width: 60, height: 60 }}
             />
