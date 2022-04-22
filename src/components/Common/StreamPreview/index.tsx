@@ -33,7 +33,7 @@ export const StreamPreview: FC<StreamObject> = ({
         />
       </ImageContainer>
       <InfoContainer>
-        <Avatar src={userpicture} />
+        <Avatar alt={username} src={userpicture} />
         <div style={{ marginLeft: '1rem' }}>
           <Typography variant='body2'>
             <strong>{title}</strong>
