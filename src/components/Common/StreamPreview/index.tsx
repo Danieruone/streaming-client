@@ -24,7 +24,13 @@ export const StreamPreview: FC<StreamObject> = ({
     <Container to={`/${username}`}>
       <ImageContainer>
         <DirectBadge>EN DIRECTO</DirectBadge>
-        <img src={thumbnail} />
+        <img
+          src={
+            thumbnail
+              ? thumbnail
+              : 'https://vod-secure.twitch.tv/_404/404_processing_320x180.png'
+          }
+        />
       </ImageContainer>
       <InfoContainer>
         <Avatar src={userpicture} />
