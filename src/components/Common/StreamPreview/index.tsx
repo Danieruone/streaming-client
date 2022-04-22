@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 // UI
 import { Avatar, Typography } from '@mui/material';
@@ -27,7 +27,7 @@ export const StreamPreview: FC<StreamObject> = ({
         <img
           src={
             thumbnail
-              ? thumbnail
+              ? `data:image/jpeg;base64,${thumbnail}`
               : 'https://vod-secure.twitch.tv/_404/404_processing_320x180.png'
           }
         />
