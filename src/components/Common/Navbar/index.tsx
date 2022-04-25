@@ -9,6 +9,9 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { Avatar, Button, Typography } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import SettingsIcon from '@mui/icons-material/Settings';
+import KeyIcon from '@mui/icons-material/Key';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // router
 import { Link } from 'react-router-dom';
@@ -96,12 +99,15 @@ export const Navbar = () => {
               PaperProps={PaperStyles}
             >
               <MenuItem onClick={() => setProfileSettingsModal(true)}>
-                Profile Settings
+                <SettingsIcon sx={{ marginRight: 1 }} /> Profile Settings
               </MenuItem>
               <MenuItem onClick={() => setStreamingKeyModal(true)}>
-                Streaming key
+                <KeyIcon sx={{ marginRight: 1 }} /> Streaming key
               </MenuItem>
-              <MenuItem onClick={Logout}>Logout</MenuItem>
+              <MenuItem onClick={Logout}>
+                <LogoutIcon sx={{ marginRight: 1 }} />
+                Logout
+              </MenuItem>
             </Menu>
           </>
         ) : (
