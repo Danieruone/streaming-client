@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 // components
 import { ModalComponent } from 'components/Shared/ModalComponent';
 import { StreamingKeyConfig } from '../StreamingKeyConfig';
+import { ProfileSettings } from '../ProfileSettings';
 
 // styles
 import {
@@ -37,6 +38,7 @@ export const Navbar = () => {
 
   // modal
   const [streamingKeyModal, setStreamingKeyModal] = useState(false);
+  const [profileSettingsModal, setProfileSettingsModal] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -93,6 +95,9 @@ export const Navbar = () => {
               }}
               PaperProps={PaperStyles}
             >
+              <MenuItem onClick={() => setProfileSettingsModal(true)}>
+                Profile Settings
+              </MenuItem>
               <MenuItem onClick={() => setStreamingKeyModal(true)}>
                 Streaming key
               </MenuItem>
@@ -116,6 +121,13 @@ export const Navbar = () => {
         setIsOpen={() => setStreamingKeyModal(false)}
       >
         <StreamingKeyConfig />
+      </ModalComponent>
+
+      <ModalComponent
+        isOpen={profileSettingsModal}
+        setIsOpen={() => setProfileSettingsModal(false)}
+      >
+        <ProfileSettings />
       </ModalComponent>
     </>
   );
