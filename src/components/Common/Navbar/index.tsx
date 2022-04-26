@@ -31,13 +31,15 @@ import {
 } from './styles';
 
 // state
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { isLoggedIn } from 'state/atoms/Auth';
 import { authModalState } from 'state/atoms/AuthFormModal';
+import { profileState } from 'state/atoms/Profile';
 
 export const Navbar = () => {
   const [isLoggedInState, setIsLoggedInState] = useRecoilState(isLoggedIn);
   const setAuthModalState = useSetRecoilState(authModalState);
+  const profileValue = useRecoilValue(profileState);
 
   // modal
   const [streamingKeyModal, setStreamingKeyModal] = useState(false);
@@ -86,7 +88,11 @@ export const Navbar = () => {
           <>
             <ProfileContainer onClick={handleClick}>
               {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-              <Avatar sx={{ width: 32, height: 32 }} />
+              <Avatar
+                src={profileValue.image}
+                alt={profileValue.username}
+                sx={{ width: 32, height: 32 }}
+              />
             </ProfileContainer>
             <Menu
               id='basic-menu'
