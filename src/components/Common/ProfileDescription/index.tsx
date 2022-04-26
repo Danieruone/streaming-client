@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState, useContext } from 'react';
 
 // UI
 import Avatar from '@mui/material/Avatar';
@@ -6,6 +6,9 @@ import { Typography } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+
+// context
+import { SocketContext } from 'context/SocketProvider';
 
 // styles
 import {
@@ -27,6 +30,24 @@ export const ProfileDescription: FC<Props> = ({
   title,
   userpicture,
 }) => {
+  const { socket } = useContext(SocketContext);
+
+  const [viwersCount, setViwersCount] = useState(0);
+
+  useEffect(() => {
+    socket.emit('roomUsers', username);
+
+    const intervalId = setInterval(() => {
+      socket.emit('roomUsers', username);
+    }, 10000);
+
+    socket.on('roomUsers', (data: any) => {
+      setViwersCount(data);
+    });
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <Container>
       <TopDescription>
@@ -52,7 +73,7 @@ export const ProfileDescription: FC<Props> = ({
 
         <Viwers>
           <PersonIcon style={{ marginRight: 5 }} />
-          <Typography variant='body1'>3.500</Typography>
+          <Typography variant='body1'>{viwersCount}</Typography>
         </Viwers>
       </TopDescription>
     </Container>
