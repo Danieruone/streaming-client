@@ -9,6 +9,9 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { Avatar, Button, Typography } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import SettingsIcon from '@mui/icons-material/Settings';
+import KeyIcon from '@mui/icons-material/Key';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // router
 import { Link } from 'react-router-dom';
@@ -28,13 +31,15 @@ import {
 } from './styles';
 
 // state
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { isLoggedIn } from 'state/atoms/Auth';
 import { authModalState } from 'state/atoms/AuthFormModal';
+import { profileState } from 'state/atoms/Profile';
 
 export const Navbar = () => {
   const [isLoggedInState, setIsLoggedInState] = useRecoilState(isLoggedIn);
   const setAuthModalState = useSetRecoilState(authModalState);
+  const profileValue = useRecoilValue(profileState);
 
   // modal
   const [streamingKeyModal, setStreamingKeyModal] = useState(false);
@@ -83,7 +88,11 @@ export const Navbar = () => {
           <>
             <ProfileContainer onClick={handleClick}>
               {open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
-              <Avatar sx={{ width: 32, height: 32 }} />
+              <Avatar
+                src={profileValue.image}
+                alt={profileValue.username}
+                sx={{ width: 32, height: 32 }}
+              />
             </ProfileContainer>
             <Menu
               id='basic-menu'
@@ -96,12 +105,15 @@ export const Navbar = () => {
               PaperProps={PaperStyles}
             >
               <MenuItem onClick={() => setProfileSettingsModal(true)}>
-                Profile Settings
+                <SettingsIcon sx={{ marginRight: 1 }} /> Profile Settings
               </MenuItem>
               <MenuItem onClick={() => setStreamingKeyModal(true)}>
-                Streaming key
+                <KeyIcon sx={{ marginRight: 1 }} /> Streaming key
               </MenuItem>
-              <MenuItem onClick={Logout}>Logout</MenuItem>
+              <MenuItem onClick={Logout}>
+                <LogoutIcon sx={{ marginRight: 1 }} />
+                Logout
+              </MenuItem>
             </Menu>
           </>
         ) : (
