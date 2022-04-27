@@ -45,7 +45,7 @@ export const ProfileSettings: FC<Props> = ({ setProfileSettingsModal }) => {
     }
 
     if (streamTitle) {
-      socket.emit('updateTitle', {
+      socket.emit('updateProfile', {
         username: profile.username,
         title: streamTitle,
       });
