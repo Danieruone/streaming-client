@@ -23,4 +23,5 @@ export const EditIconContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border: 1px solid black;
 `;

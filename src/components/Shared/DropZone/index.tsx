@@ -19,7 +19,6 @@ const toBase64 = (file: any) =>
 
 export const DropZone: FC<Props> = ({ setCurrentImage, setIsEditing }) => {
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
     toBase64(acceptedFiles[0]).then((data) => {
       setCurrentImage({
         base64: data,
