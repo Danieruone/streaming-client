@@ -43,6 +43,7 @@ export const DropZone: FC<Props> = ({ setCurrentImage, setIsEditing }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          cursor: 'pointer',
         }}
       >
         <AddIcon sx={{ color: 'gray', width: 50, height: 50 }} />

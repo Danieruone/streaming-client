@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 300px;
 `;
 
 export const ImageContainer = styled.div`
@@ -14,7 +15,7 @@ export const EditIconContainer = styled.div`
   position: absolute;
   right: 0;
   bottom: 10px;
-  background-color: #c6c6c6;
+  background-color: rgba(1, 1, 1, 0.5);
   padding: 2px;
   border-radius: 50%;
   width: 30px;

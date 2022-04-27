@@ -139,7 +139,7 @@ export const Navbar = () => {
         isOpen={profileSettingsModal}
         setIsOpen={() => setProfileSettingsModal(false)}
       >
-        <ProfileSettings />
+        <ProfileSettings setProfileSettingsModal={setProfileSettingsModal} />
       </ModalComponent>
     </>
   );

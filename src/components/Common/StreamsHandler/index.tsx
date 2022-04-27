@@ -52,5 +52,19 @@ export const StreamsHandler: FC<Props> = ({ children }) => {
     });
   }, [socket]);
 
+  useEffect(() => {
+    socket.on('updateTitle', (updatedStream: StreamObject) => {
+      setStreamsArray((prev) =>
+        prev.map((oldStream) => {
+          if (oldStream.username === updatedStream.username) {
+            return updatedStream;
+          } else {
+            return oldStream;
+          }
+        })
+      );
+    });
+  }, [socket]);
+
   return <>{children}</>;
 };

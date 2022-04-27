@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext, FC } from 'react';
 
 // components
 import { DropZone } from 'components/Shared/DropZone';
@@ -7,6 +7,7 @@ import { DropZone } from 'components/Shared/DropZone';
 import { Button, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { CircularProgress } from '@mui/material';
+import { TextField } from '@mui/material';
 
 // state
 import { useRecoilState } from 'recoil';
@@ -15,25 +16,44 @@ import { profileState } from 'state/atoms/Profile';
 // services
 import { updateProfileInfo } from 'services/Stream';
 
+// context
+import { SocketContext } from 'context/SocketProvider';
+
 // styles
 import { Container, ImageContainer, EditIconContainer } from './styles';
 
-export const ProfileSettings = () => {
+interface Props {
+  setProfileSettingsModal: any;
+}
+
+export const ProfileSettings: FC<Props> = ({ setProfileSettingsModal }) => {
+  const { socket } = useContext(SocketContext);
   const [profile, setProfile] = useRecoilState(profileState);
 
   const [currentImage, setCurrentImage] = useState<any>(null);
+  const [streamTitle, setStreamTitle] = useState<any>();
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const updateProfile = () => {
     setIsLoading(true);
-    updateProfileInfo({ image: currentImage.base64 })
-      .then(({ data }) => {
+    if (currentImage) {
+      updateProfileInfo({ image: currentImage.base64 }).then(({ data }) => {
         const profileData = { ...profile, image: data.image };
         setProfile(profileData);
-      })
-      .finally(() => setIsLoading(false));
+      });
+    }
+
+    if (streamTitle) {
+      socket.emit('updateTitle', {
+        username: profile.username,
+        title: streamTitle,
+      });
+    }
+    setProfileSettingsModal(false);
   };
+
+  const showButton = currentImage || streamTitle;
 
   return (
     <Container>
@@ -64,9 +84,15 @@ export const ProfileSettings = () => {
         {profile.username}
       </Typography>
 
-      <Typography variant='body2'>Jugando lolsito hoy</Typography>
+      <TextField
+        id='standard-basic'
+        label='Stream title'
+        variant='standard'
+        color='warning'
+        onChange={(e) => setStreamTitle(e.target.value)}
+      />
 
-      {currentImage && (
+      {showButton && (
         <div style={{ marginTop: 30 }}>
           {isLoading ? (
             <CircularProgress color='warning' />
