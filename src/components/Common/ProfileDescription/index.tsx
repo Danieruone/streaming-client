@@ -37,6 +37,7 @@ export const ProfileDescription: FC<Props> = ({
 
   const [viwersCount, setViwersCount] = useState(0);
   const [streamTitle, setStreamTitle] = useState(title);
+  const [streamImage, setstreamImage] = useState(userpicture);
 
   useEffect(() => {
     socket.emit('roomUsers', username);
@@ -50,8 +51,9 @@ export const ProfileDescription: FC<Props> = ({
   }, []);
 
   useEffect(() => {
-    socket.on('updateTitle', (updatedStream: StreamObject) => {
+    socket.on('updateProfile', (updatedStream: StreamObject) => {
       setStreamTitle(updatedStream.title);
+      setstreamImage(updatedStream.userpicture);
     });
   }, [socket]);
 
@@ -62,7 +64,7 @@ export const ProfileDescription: FC<Props> = ({
           <AvatarCircle>
             <Avatar
               alt={username}
-              src={userpicture || ''}
+              src={streamImage || ''}
               sx={{ width: 60, height: 60 }}
             />
           </AvatarCircle>
