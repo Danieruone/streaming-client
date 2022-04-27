@@ -21,3 +21,12 @@ export const refreshStreamingKey = () => {
     },
   });
 };
+
+export const updateProfileInfo = (payload: any) => {
+  const token = localStorage.getItem('access_token');
+  return axios.patch(`${import.meta.env.VITE_BASE_URL}user`, payload, {
+    headers: {
+      Authorization: 'Bearer ' + token || '',
+    },
+  });
+};

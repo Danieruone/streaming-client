@@ -10,6 +10,9 @@ import Stack from '@mui/material/Stack';
 // context
 import { SocketContext } from 'context/SocketProvider';
 
+// types
+import { StreamObject } from 'interfaces/StreeamObject';
+
 // styles
 import {
   Container,
@@ -33,20 +36,24 @@ export const ProfileDescription: FC<Props> = ({
   const { socket } = useContext(SocketContext);
 
   const [viwersCount, setViwersCount] = useState(0);
+  const [streamTitle, setStreamTitle] = useState(title);
 
   useEffect(() => {
     socket.emit('roomUsers', username);
-
     const intervalId = setInterval(() => {
       socket.emit('roomUsers', username);
     }, 10000);
-
     socket.on('roomUsers', (data: any) => {
       setViwersCount(data);
     });
-
     return () => clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    socket.on('updateTitle', (updatedStream: StreamObject) => {
+      setStreamTitle(updatedStream.title);
+    });
+  }, [socket]);
 
   return (
     <Container>
@@ -62,7 +69,7 @@ export const ProfileDescription: FC<Props> = ({
 
           <div>
             <Typography variant='h6'>{username || ''}</Typography>
-            <Typography variant='body2'>{title || ''}</Typography>
+            <Typography variant='body2'>{streamTitle || ''}</Typography>
 
             <Stack direction='row' spacing={1} style={{ marginTop: 5 }}>
               <Chip label='Games' />
