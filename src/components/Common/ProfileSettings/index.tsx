@@ -8,6 +8,7 @@ import { Button, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { CircularProgress } from '@mui/material';
 import { TextField } from '@mui/material';
+import { Avatar } from '@mui/material';
 
 // state
 import { useRecoilState } from 'recoil';
@@ -35,15 +36,21 @@ export const ProfileSettings: FC<Props> = ({ setProfileSettingsModal }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const updateProfile = () => {
+  const updateImage = () => {
     setIsLoading(true);
-    if (currentImage) {
-      updateProfileInfo({ image: currentImage.base64 }).then(({ data }) => {
+    updateProfileInfo({ image: currentImage.base64 })
+      .then(({ data }) => {
         const profileData = { ...profile, image: data.image };
+        localStorage.setItem('user_data', JSON.stringify(profileData));
         setProfile(profileData);
-      });
-    }
+      })
+      .finally(() => setIsLoading(false));
+  };
 
+  const updateProfile = () => {
+    if (currentImage) {
+      updateImage();
+    }
     if (streamTitle) {
       socket.emit('updateProfile', {
         username: profile.username,
@@ -64,7 +71,7 @@ export const ProfileSettings: FC<Props> = ({ setProfileSettingsModal }) => {
         />
       ) : (
         <ImageContainer onClick={() => setIsEditing(true)}>
-          <img
+          <Avatar
             src={currentImage ? currentImage.preview : profile.image}
             alt={profile.username}
             style={{
