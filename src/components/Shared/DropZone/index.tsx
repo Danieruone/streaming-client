@@ -1,20 +1,53 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-export const DropZone = () => {
+// UI
+import AddIcon from '@mui/icons-material/Add';
+
+interface Props {
+  setCurrentImage: any;
+  setIsEditing: any;
+}
+
+const toBase64 = (file: any) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
+export const DropZone: FC<Props> = ({ setCurrentImage, setIsEditing }) => {
   const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
+    console.log(acceptedFiles);
+    toBase64(acceptedFiles[0]).then((data) => {
+      setCurrentImage({
+        base64: data,
+        preview: URL.createObjectURL(acceptedFiles[0]),
+      });
+      setIsEditing(false);
+    });
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Drop the files here ...</p>
-      ) : (
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      )}
+
+      <div
+        style={{
+          width: 100,
+          height: 100,
+          border: '1px solid black',
+          borderRadius: '50%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <AddIcon sx={{ color: 'gray', width: 50, height: 50 }} />
+      </div>
     </div>
   );
 };
